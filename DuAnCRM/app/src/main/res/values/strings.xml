@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">DuAnCRM</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <string name="string_leads">Leads</string>
+    <string name="string_customers">Customers</string>
+    <string name="string_labels">Labels</string>
+    <string name="string_tasks">Tasks</string>
+    <string name="string_graph">Graph</string>
 </resources>
