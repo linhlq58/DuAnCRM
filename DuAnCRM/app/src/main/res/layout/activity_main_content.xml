@@ -18,8 +18,8 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/size_20"
+                android:layout_height="@dimen/size_20"
                 android:src="@drawable/ic_menu"
                 android:layout_centerInParent="true"/>
 
@@ -47,7 +47,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/size_60"
         android:layout_alignParentBottom="true"
         app:tabBackground="@android:color/transparent"
         app:tabIndicatorColor="@color/colorPrimary"

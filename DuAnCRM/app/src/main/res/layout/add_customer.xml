@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_60"
+        android:background="@color/colorPrimary">
+
+        <Button
+            android:layout_marginStart="@dimen/dp_10"
+            android:id="@+id/btn_close"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/height_50"
+            android:layout_height="@dimen/size_40"
+            android:background="@drawable/close_button" />
+
+        <TextView
+            android:id="@+id/txt_label"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Add Customer"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/btn_check"
+            android:layout_width="@dimen/size_60"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/check_button" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_actionbar"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/size_20">
+
+        <RelativeLayout
+            android:id="@+id/rl_image"
+            android:layout_width="@dimen/height_50"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_user"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:alpha="0.6"
+                android:background="@drawable/user" />
+
+            <ImageView
+                android:id="@+id/img_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/img_user"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/phone" />
+
+            <ImageView
+                android:id="@+id/img_company"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/img_phone"
+                android:layout_marginTop="@dimen/size_20"
+                android:alpha="0.8"
+                android:background="@drawable/company" />
+
+            <ImageView
+                android:id="@+id/img_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/img_company"
+                android:layout_marginTop="@dimen/size_20"
+                android:background="@drawable/mail" />
+
+            <ImageView
+                android:id="@+id/img_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/img_email"
+                android:layout_marginTop="@dimen/size_20"
+                android:alpha="0.8"
+                android:background="@drawable/location" />
+
+            <ImageView
+                android:id="@+id/img_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/img_location"
+                android:layout_marginTop="@dimen/size_20"
+                android:alpha="0.6"
+                android:background="@drawable/birthday_cake" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/rl_image">
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_marginTop="@dimen/dp_10"
+                android:hint="Tên khách hàng" />
+
+
+            <EditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:inputType="phone"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/edt_name"
+                android:layout_marginTop="@dimen/size_20"
+                android:hint="Số điện thoại" />
+
+            <EditText
+                android:id="@+id/edt_company"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/edt_phone"
+                android:layout_marginTop="@dimen/size_20"
+                android:hint="Công ty" />
+
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/edt_company"
+                android:inputType="textEmailAddress"
+                android:layout_marginTop="@dimen/size_20"
+                android:hint="Địa chỉ email" />
+
+            <EditText
+                android:id="@+id/edt_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_below="@id/edt_email"
+                android:layout_marginTop="@dimen/size_20"
+                android:hint="Địa chỉ" />
+
+            <EditText
+                android:id="@+id/edt_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:inputType="date"
+                android:layout_below="@id/edt_address"
+                android:layout_marginTop="@dimen/size_20"
+                android:hint="Ngày sinh" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.totnghiepluon.duancrm;
+package com.totnghiepluon.duancrm.data;
 
 import android.content.Context;
 import android.util.Log;

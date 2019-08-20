@@ -12,14 +12,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.totnghiepluon.duancrm.Base.BaseActivity;
 import com.totnghiepluon.duancrm.R;
-import com.totnghiepluon.duancrm.ReadWriteFile;
+import com.totnghiepluon.duancrm.data.ReadWriteFile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private Button mBtnLogin;
     private TextView mForget;
     private TextView mHelp;
@@ -29,30 +30,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mPassword;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
-        init();
+    protected int getLayoutResource() {
+        return R.layout.login_activity;
     }
 
-    private void init() {
-
+    @Override
+    protected void initVariables(Bundle savedInstanceState) {
         readWriteFile = new ReadWriteFile(this);
         mBtnLogin = findViewById(R.id.btn_login);
-        mBtnLogin.setOnClickListener(this);
         mForget = findViewById(R.id.tv_forget);
-        mForget.setOnClickListener(this);
         mHelp = findViewById(R.id.tv_help);
-        mHelp.setOnClickListener(this);
         mUserName = findViewById(R.id.edt_username);
-        mUserName.setOnClickListener(this);
         mPassword = findViewById(R.id.edt_password);
-        mPassword.setOnClickListener(this);
         mForget.setPaintFlags(mForget.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mHelp.setPaintFlags(mHelp.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         intent = new Intent(this, MainActivity.class);
-        readWriteFile.writeToFile("huybv,123|abc,1231|asd,asdasd|asdasca,kdioas");
 
+    }
+
+    @Override
+    protected void initData(Bundle savedInstanceState) {
+        mBtnLogin.setOnClickListener(this);
+        mForget.setOnClickListener(this);
+        mHelp.setOnClickListener(this);
+        mUserName.setOnClickListener(this);
+        mPassword.setOnClickListener(this);
+        readWriteFile.writeToFile("huybv,123|abc,1231|asd,asdasd|asdasca,kdioas");
     }
 
     @Override

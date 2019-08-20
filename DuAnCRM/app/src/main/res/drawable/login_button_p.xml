@@ -5,11 +5,11 @@
     <corners
         android:bottomLeftRadius="@dimen/login_radius"
         android:bottomRightRadius="@dimen/login_radius"
-        android:radius="60dp"
+        android:radius="@dimen/size_60"
         android:topLeftRadius="@dimen/login_radius"
         android:topRightRadius="@dimen/login_radius" />
 
-    <solid android:color="#CFCFCF" />
+    <solid android:color="@color/colorPressed" />
 
     <padding
         android:bottom="@dimen/dp_0"
@@ -18,7 +18,7 @@
         android:top="@dimen/dp_0" />
 
     <size
-        android:height="60dp"
+        android:height="@dimen/size_60"
         android:width="270dp" />
 
 </shape>

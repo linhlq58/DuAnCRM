@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#01aeeb</color>
+    <color name="colorPrimary">#00A4DD</color>
+    <color name="colorPressed">#0061CC</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="highchart">#a4e4fb</color>

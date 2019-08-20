@@ -2,7 +2,6 @@ package com.totnghiepluon.duancrm.Graph;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
-import com.totnghiepluon.duancrm.GetDataFromPreference;
+import com.totnghiepluon.duancrm.data.GetDataFromPreference;
 import com.totnghiepluon.duancrm.R;
 
 import java.util.ArrayList;
