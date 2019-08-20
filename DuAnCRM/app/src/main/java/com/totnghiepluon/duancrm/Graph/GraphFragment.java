@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -60,7 +59,7 @@ public class GraphFragment extends BaseFragment {
 
     @Override
     protected int getLayoutResource() {
-        return 0;
+        return R.layout.fragment_graph;
     }
 
     @Override
@@ -77,21 +76,21 @@ public class GraphFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        init();
+        View view = inflater.inflate(R.layout.fragment_graph, container, false);
+        init(view);
         drawChart();
         drawPieChart();
         printDataFromAPI();
-        View view = inflater.inflate(R.layout.fragment_graph, container, false);
         return view;
     }
 
     private void printDataFromAPI() {
     }
 
-    private void init() {
-        pieChart = getView().findViewById(R.id.pieChart);
+    private void init(View container) {
+        pieChart = container.findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
-        barChart = getView().findViewById(R.id.barChart);
+        barChart = container.findViewById(R.id.barChart);
         random = new Random();
         mChartName = "pieChart";
         description = new Description();
