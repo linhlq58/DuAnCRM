@@ -8,10 +8,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainHandle.MainActivity"/>
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainHandle.LoginActivity"/>
         <activity android:name=".AddCustomer"/>
-        <activity android:name=".MainHandle.LoginActivity">
+        <activity android:name=".ContactData.ContactsActivity"/>
+        <activity android:name=".MainHandle.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -19,4 +20,5 @@
         </activity>
     </application>
 
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 </manifest>

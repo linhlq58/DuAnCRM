@@ -1,9 +1,15 @@
 package com.totnghiepluon.duancrm.MainHandle;
 
 import com.google.android.material.tabs.TabLayout;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.viewpager.widget.ViewPager;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -13,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.totnghiepluon.duancrm.ContactData.ContactsActivity;
 import com.totnghiepluon.duancrm.Customers.CustomersFragment;
 import com.totnghiepluon.duancrm.Graph.GraphFragment;
 import com.totnghiepluon.duancrm.Labels.LabelsFragment;
@@ -23,7 +30,7 @@ import com.totnghiepluon.duancrm.Base.BaseActivity;
 
 import java.util.ArrayList;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
     private DrawerLayout drawer;
     private TabLayout tabs;
     private ViewPager pager;
@@ -40,6 +47,10 @@ public class MainActivity extends BaseActivity {
 
     private ArrayList<Fragment> listFragment;
 
+    private RelativeLayout btnImport;
+
+    private static int PERMISSIONS_REQUEST_READ_CONTACTS = 1267;
+
     @Override
     protected int getLayoutResource() {
         return R.layout.activity_main;
@@ -52,6 +63,8 @@ public class MainActivity extends BaseActivity {
         pager = findViewById(R.id.pager);
         btnMenu = findViewById(R.id.btn_menu);
         tvTitle = findViewById(R.id.tv_title);
+
+        btnImport = findViewById(R.id.btn_import);
     }
 
     @Override
@@ -69,6 +82,12 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
+
+        btnImport.setOnClickListener(this);
     }
 
     private void setupTabLayout() {
@@ -158,5 +177,26 @@ public class MainActivity extends BaseActivity {
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_import:
+                startActivity(ContactsActivity.class);
+                break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission is granted
+
+            } else {
+                finish();
+            }
+        }
     }
 }
