@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:paddingEnd="@dimen/dp_10"
     android:layout_height="match_parent"
+    android:paddingStart="@dimen/dp_10"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -11,7 +13,6 @@
         android:background="@color/colorPrimary">
 
         <Button
-            android:layout_marginStart="@dimen/dp_10"
             android:id="@+id/btn_close"
             android:layout_centerVertical="true"
             android:layout_width="@dimen/height_50"
@@ -25,13 +26,13 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="@color/white"
-            android:text="Add Customer"
-            android:textSize="30sp" />
+            android:textSize="25sp" />
 
         <Button
             android:id="@+id/btn_check"
-            android:layout_width="@dimen/size_60"
-            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_width="@dimen/height_50"
+            android:layout_height="@dimen/height_50"
             android:layout_alignParentEnd="true"
             android:background="@drawable/check_button" />
     </RelativeLayout>
@@ -40,7 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/rl_actionbar"
-        android:paddingLeft="@dimen/dp_10"
         android:paddingTop="@dimen/size_20">
 
         <RelativeLayout
@@ -102,7 +102,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/rl_image">
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/rl_image">
 
             <EditText
                 android:id="@+id/edt_name"
@@ -115,11 +116,11 @@
             <EditText
                 android:id="@+id/edt_phone"
                 android:layout_width="match_parent"
-                android:inputType="phone"
                 android:layout_height="@dimen/height_50"
                 android:layout_below="@id/edt_name"
                 android:layout_marginTop="@dimen/size_20"
-                android:hint="Số điện thoại" />
+                android:hint="Số điện thoại"
+                android:inputType="phone" />
 
             <EditText
                 android:id="@+id/edt_company"
@@ -134,9 +135,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_50"
                 android:layout_below="@id/edt_company"
-                android:inputType="textEmailAddress"
                 android:layout_marginTop="@dimen/size_20"
-                android:hint="Địa chỉ email" />
+                android:hint="Địa chỉ email"
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/edt_address"
@@ -150,10 +151,10 @@
                 android:id="@+id/edt_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_50"
-                android:inputType="date"
                 android:layout_below="@id/edt_address"
                 android:layout_marginTop="@dimen/size_20"
-                android:hint="Ngày sinh" />
+                android:hint="Ngày sinh"
+                android:inputType="date" />
         </RelativeLayout>
 
 

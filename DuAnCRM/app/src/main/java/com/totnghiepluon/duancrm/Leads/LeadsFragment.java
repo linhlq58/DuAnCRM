@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.totnghiepluon.duancrm.AddCustomer;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
 import com.totnghiepluon.duancrm.R;
+import com.totnghiepluon.duancrm.utils.Constants;
 
 public class LeadsFragment extends BaseFragment implements View.OnClickListener {
     private Button mAddLead;
@@ -50,6 +51,7 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
 
     private void changeActivity() {
         Intent intent = new Intent(getActivity(), AddCustomer.class);
+        intent.putExtra(Constants.EXTRAS,false);
         startActivity(intent);
     }
 }

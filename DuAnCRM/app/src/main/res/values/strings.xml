@@ -5,14 +5,16 @@
     <string name="login_button">Đăng nhập</string>
     <string name="forget_account">Quên mật khẩu?</string>
     <string name="help">Trợ giúp?</string>
+    <string name="add_customer">Thêm khách hàng</string>
+    <string name="add_leader">Thêm khách hàng tiềm năng</string>
     <string name="red_notice">Bạn không được bỏ trống mục này</string>
     <string name="app_name">DuAnCRM</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
-    <string name="string_leads">Leads</string>
-    <string name="string_customers">Customers</string>
-    <string name="string_labels">Labels</string>
-    <string name="string_tasks">Tasks</string>
-    <string name="string_graph">Graph</string>
+    <string name="string_leads">Tiềm năng</string>
+    <string name="string_customers">Khách hàng</string>
+    <string name="string_labels">Nhãn hiệu</string>
+    <string name="string_tasks">Nhiệm vụ</string>
+    <string name="string_graph">Đồ thị</string>
 
 </resources>
