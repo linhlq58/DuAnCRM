@@ -86,7 +86,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void changeActivity() {
         List accountList = getAccountList();
-        Log.d("Huybv", "account list size = " + accountList.size());
         boolean isSuitable = true;
         String password = mPassword.getText().toString();
         String username = mUserName.getText().toString();

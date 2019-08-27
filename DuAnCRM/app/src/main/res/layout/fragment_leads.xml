@@ -1,19 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
     android:layout_height="match_parent">
+
     <Button
         android:id="@+id/btn_add"
         android:layout_width="@dimen/size_60"
         android:layout_height="@dimen/size_60"
-        android:background="@drawable/add_button"
-        android:text="+"
-        android:textColor="@color/white"
-        android:textSize="30sp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_30"
         android:layout_marginEnd="@dimen/dp_30"
-        android:gravity="center"/>
+        android:layout_marginBottom="@dimen/dp_30"
+        android:background="@drawable/add_button"
+        android:gravity="center"
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Lê Thanh Hải"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_below="@id/text"
+            android:text="VNU University"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+
+        android:layout_below="@id/rl_1"
+        android:background="@drawable/co_bg_list_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_2"
+        android:layout_width="match_parent"
+
+        android:layout_height="70dp"
+        android:layout_below="@id/rl_1">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Phạm Tuấn Tài"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_below="@id/text1"
+            android:text="Toshiba Electronic"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/rl_2"
+        android:background="@drawable/co_bg_list_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_3"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/rl_2">
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+
+            android:layout_height="40dp"
+            android:text="Trần Quốc Hoàn"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_below="@id/text3"
+            android:text="IPH tower"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/rl_3"
+        android:background="@drawable/co_bg_list_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/rl_3">
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="match_parent"
+
+            android:layout_height="40dp"
+            android:text="Trần Quốc Vượng"
+            android:textColor="#000000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_below="@id/text4"
+            android:text="VNU International school"
+            android:textSize="20sp" />
+    </RelativeLayout>
 </RelativeLayout>
