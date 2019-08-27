@@ -11,8 +11,10 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +29,7 @@ import com.totnghiepluon.duancrm.Leads.LeadsFragment;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.Tasks.TasksFragment;
 import com.totnghiepluon.duancrm.Base.BaseActivity;
+import com.totnghiepluon.duancrm.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -35,7 +38,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TabLayout tabs;
     private ViewPager pager;
     private TabsPagerAdapter pagerAdapter;
-
+    private boolean isManager;
     private RelativeLayout btnMenu;
     private TextView tvTitle;
 
@@ -46,7 +49,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private GraphFragment graphFragment;
 
     private ArrayList<Fragment> listFragment;
-
+    private RelativeLayout btnManageAccount;
     private RelativeLayout btnImport;
 
     private static int PERMISSIONS_REQUEST_READ_CONTACTS = 1267;
@@ -63,15 +66,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         pager = findViewById(R.id.pager);
         btnMenu = findViewById(R.id.btn_menu);
         tvTitle = findViewById(R.id.tv_title);
-
+        isManager = getIntent().getBooleanExtra(Constants.LOGIN, false);
         btnImport = findViewById(R.id.btn_import);
+        btnManageAccount = findViewById(R.id.btn_acc_manage);
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
         createDrawerLayout();
         setupTabLayout();
-
+        if (!isManager){
+            btnManageAccount.setVisibility(View.GONE);
+        }
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

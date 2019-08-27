@@ -10,18 +10,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-public class ReadWriteFile {
+public class RWManagerFile {
     private Context context;
     private int quantityAccount = 4;
 
-    public ReadWriteFile(Context context) {
+    public RWManagerFile(Context context) {
         this.context = context;
     }
 
-    public void writeToFile(String data) {
+    public void writeToFile(String data,boolean isManager) {
+        String fileName = "account.txt";
+        if(isManager){
+            fileName = "maccount.txt";
+        }
         try {
-            data = readFromFile() + "|" + data;
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("acount.txt", Context.MODE_PRIVATE));
+            data = readFromFile(isManager) + "|" + data;
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(fileName,
+                    Context.MODE_PRIVATE));
             outputStreamWriter.write(data);
             outputStreamWriter.close();
         } catch (IOException e) {
@@ -29,12 +34,15 @@ public class ReadWriteFile {
         }
     }
 
-    public String readFromFile() {
+    public String readFromFile(boolean isManager) {
 
         String ret = "";
-
+        String fileName = "account.txt";
+        if(isManager){
+            fileName = "maccount.txt";
+        }
         try {
-            InputStream inputStream = context.openFileInput("acount.txt");
+            InputStream inputStream = context.openFileInput(fileName);
 
             if (inputStream != null) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

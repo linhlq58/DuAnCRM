@@ -2,6 +2,7 @@ package com.totnghiepluon.duancrm.utils;
 
 public class Constants {
     public static final String EXTRAS = "add";
+    public static final String LOGIN = "login";
     public static final String TABLE_NAME = "Customers";
     public static final String NAME = "Name";
     public static final String COMPANY = "Company";

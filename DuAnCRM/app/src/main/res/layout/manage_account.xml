@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="5dp"
+    android:paddingVertical="@dimen/dp_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_account"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="Thêm tài khoản"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/change_pass"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="Đổi mật khẩu"
+
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/delete_account"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="Xóa tài khoản"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Hủy"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:background="@drawable/manage_button"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_marginStart="5dp"
+            android:text="Hoàn thành"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_height="match_parent"
+            android:background="@drawable/manage_button"
+            android:layout_weight="1" />
+    </LinearLayout>
+</RelativeLayout>
