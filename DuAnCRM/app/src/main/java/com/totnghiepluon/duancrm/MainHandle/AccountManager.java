@@ -92,8 +92,8 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         }
     }
 
+    //checking condition after click at finish button
     private void checkFinish() {
-
         boolean isSuitable = true;
         if (pass1.getText().toString().equals("")) {
             pass1.setHint(getResources().getString(R.string.red_notice));
@@ -118,20 +118,24 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
             txtPassNotice.setVisibility(View.VISIBLE);
             return;
         }
+        //get userlist from Textfile
         String managerList = rwManagerFile.readFromFile(true);
         String staffList = rwManagerFile.readFromFile(false);
         String username = user.getText().toString();
         if (currentMode == Constants.ADD_NEW_ACCOUNT) {
             createNewAccount(managerList, staffList);
         } else if (currentMode == Constants.EDIT_ACCOUNT) {
-            editAccountPass(managerList, staffList, username,true);
-        }else if(currentMode == Constants.DELETE_ACCOUNT){
-            editAccountPass(managerList,staffList,username,false);
+            editAccountPass(managerList, staffList, username, true);
+        } else if (currentMode == Constants.DELETE_ACCOUNT) {
+            editAccountPass(managerList, staffList, username, false);
         }
     }
 
 
-    private void editAccountPass(String managerList, String staffList, String username,boolean isAppend) {
+    /*
+    Edit password or delete username in DB
+     */
+    private void editAccountPass(String managerList, String staffList, String username, boolean isAppend) {
         List<String> userlist;
         boolean isManager = true;
         if (managerList.contains("|" + username + ",")) {
@@ -148,10 +152,9 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         for (int i = 0; i < userlist.size(); i++) {
             temp = "|" + userlist.get(i);
             if (temp.contains("|" + username + ",")) {
-                if(isAppend) {
+                if (isAppend) {
                     userlist.set(i, username + "," + pass1.getText().toString());
-                }
-                else {
+                } else {
                     userlist.remove(i);
                 }
                 writeToFile(userlist, isManager);
@@ -161,6 +164,7 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
 
     }
 
+    //write account list to file
     private void writeToFile(List<String> userlist, boolean isManager) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < userlist.size(); i++) {
@@ -172,6 +176,7 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         Log.d("Huybv", rwManagerFile.readFromFile(isManager));
     }
 
+    //create new account
     private void createNewAccount(String managerList, String staffList) {
         if (managerList.contains("|" + user.getText().toString() + ",")
                 || staffList.contains("|" + user.getText().toString() + ",")) {
@@ -187,6 +192,7 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         finish();
     }
 
+    //action when change mode to Delete account
     private void deleteAccountMode() {
         btnEditAccount.setTextColor(getResources().getColor(R.color.dark, null));
         btnNewAccount.setTextColor(getResources().getColor(R.color.dark, null));
@@ -200,6 +206,7 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         currentMode = Constants.DELETE_ACCOUNT;
     }
 
+    //action when change mode to add new account
     private void addAccountMode() {
         btnEditAccount.setTextColor(getResources().getColor(R.color.dark, null));
         btnDeleteAccount.setTextColor(getResources().getColor(R.color.dark, null));
@@ -213,6 +220,7 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         currentMode = Constants.ADD_NEW_ACCOUNT;
     }
 
+    //action when change mode to modify password
     private void changePassMode() {
         currentMode = Constants.EDIT_ACCOUNT;
         btnDeleteAccount.setTextColor(getResources().getColor(R.color.dark, null));
@@ -226,6 +234,7 @@ public class AccountManager extends BaseActivity implements View.OnClickListener
         pass2.setVisibility(View.VISIBLE);
     }
 
+    //get list account from DB. Convert text to account list
     private List<String> getAccountList(boolean isManager) {
         List<String> accountLists = new ArrayList<>();
         String savedString = rwManagerFile.readFromFile(isManager);

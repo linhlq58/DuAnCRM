@@ -2,7 +2,6 @@ package com.totnghiepluon.duancrm.Graph;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,7 @@ public class GraphFragment extends BaseFragment {
     private YAxis y1;
     private int sum;
     private Random random;
-    public int[] colors = {
+    private int[] colors = {
             Color.rgb(192, 255, 140), Color.rgb(255, 247, 140), Color.rgb(255, 208, 140),
             Color.rgb(140, 234, 255), Color.rgb(255, 140, 157), Color.rgb(255, 208, 140)
     };
@@ -152,10 +151,10 @@ public class GraphFragment extends BaseFragment {
             barChart.notifyDataSetChanged();
         } else {
             set1 = new BarDataSet(yVal1, "Số tiền");
-            set1.setColor(getResources().getColor(R.color.shortchart));
+            set1.setColor(getResources().getColor(R.color.shortchart, null));
             set2 = new BarDataSet(yVal2, "second");
-            set2.setColor(getResources().getColor(R.color.highchart));
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+            set2.setColor(getResources().getColor(R.color.highchart, null));
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
             dataSets.add(set1);
             dataSets.add(set2);
             BarData data = new BarData((dataSets));
@@ -168,12 +167,12 @@ public class GraphFragment extends BaseFragment {
 
     private void drawPieChart() {
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-        yvalues.add(new PieEntry((listMonth.get(0)*100/sum), "Một", 0));
-        yvalues.add(new PieEntry((listMonth.get(1)*100/sum), "Hai", 1));
-        yvalues.add(new PieEntry((listMonth.get(2)*100/sum), "Ba", 2));
-        yvalues.add(new PieEntry((listMonth.get(3)*100/sum), "Bốn", 3));
-        yvalues.add(new PieEntry((listMonth.get(4)*100/sum), "Năm", 4));
-        yvalues.add(new PieEntry((listMonth.get(5)*100/sum), "Sáu", 5));
+        yvalues.add(new PieEntry(((float) listMonth.get(0) * 100 / sum), "Một", 0));
+        yvalues.add(new PieEntry(((float) listMonth.get(1) * 100 / sum), "Hai", 1));
+        yvalues.add(new PieEntry(((float) listMonth.get(2) * 100 / sum), "Ba", 2));
+        yvalues.add(new PieEntry(((float) listMonth.get(3) * 100 / sum), "Bốn", 3));
+        yvalues.add(new PieEntry(((float) listMonth.get(4) * 100 / sum), "Năm", 4));
+        yvalues.add(new PieEntry(((float) listMonth.get(5) * 100 / sum), "Sáu", 5));
         PieDataSet dataSet = new PieDataSet(yvalues, "|Các tháng");
         PieData data = new PieData(dataSet);
 
