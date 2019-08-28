@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import com.totnghiepluon.duancrm.AddCustomer;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
-import com.totnghiepluon.duancrm.Leads.LeadsFragment;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.utils.Constants;
 
@@ -41,18 +40,14 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.customer_add:
-                changeActivity();
-                break;
-            default:
-                break;
+        if (view.getId() == R.id.customer_add) {
+            changeActivity();
         }
     }
 
     private void changeActivity() {
         Intent intent = new Intent(getActivity(), AddCustomer.class);
-        intent.putExtra(Constants.EXTRAS,true);
+        intent.putExtra(Constants.EXTRAS, true);
         startActivity(intent);
     }
 }

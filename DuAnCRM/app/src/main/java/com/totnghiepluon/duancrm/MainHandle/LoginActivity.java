@@ -21,7 +21,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button mBtnLogin;
     private TextView mForget;
     private TextView mHelp;
-    private RWManagerFile RWManagerFile;
+    private TextView mWrongAccount;
+    private RWManagerFile rwManagerFile;
     private EditText mUserName;
     private Intent intent;
     private EditText mPassword;
@@ -33,10 +34,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initVariables(Bundle savedInstanceState) {
-        RWManagerFile = new RWManagerFile(this);
+        rwManagerFile = new RWManagerFile(this);
         mBtnLogin = findViewById(R.id.btn_login);
         mForget = findViewById(R.id.tv_forget);
         mHelp = findViewById(R.id.tv_help);
+        mWrongAccount = findViewById(R.id.wrong_account);
         mUserName = findViewById(R.id.edt_username);
         mPassword = findViewById(R.id.edt_password);
         mForget.setPaintFlags(mForget.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -46,14 +48,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mWrongAccount.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     protected void initData(Bundle savedInstanceState) {
         mBtnLogin.setOnClickListener(this);
         mForget.setOnClickListener(this);
         mHelp.setOnClickListener(this);
         mUserName.setOnClickListener(this);
         mPassword.setOnClickListener(this);
-        RWManagerFile.writeToFile("admin,admin|huybv,123", true);
-        RWManagerFile.writeToFile("s,s", false);
+        rwManagerFile.writeToFile(Constants.MANAGER_ACCOUNT, true);
+        rwManagerFile.writeToFile(Constants.STAFF_ACCOUNT, false);
     }
 
     @Override
@@ -77,9 +85,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private void changeHintColor() {
         mUserName.setHint(getResources().getString(R.string.account_hint));
-        mUserName.setHintTextColor(getResources().getColor(R.color.hint_color));
+        mUserName.setHintTextColor(getResources().getColor(R.color.hint_color, null));
         mPassword.setHint(getResources().getString(R.string.pass_hint));
-        mPassword.setHintTextColor(getResources().getColor(R.color.hint_color));
+        mPassword.setHintTextColor(getResources().getColor(R.color.hint_color, null));
     }
 
     private void changeActivity() {
@@ -90,12 +98,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         String username = mUserName.getText().toString();
         if (username.equals("")) {
             mUserName.setHint(getResources().getString(R.string.red_notice));
-            mUserName.setHintTextColor(getResources().getColor(R.color.red));
+            mUserName.setHintTextColor(getResources().getColor(R.color.red, null));
             isSuitable = false;
         }
         if (password.equals("")) {
             mPassword.setHint(getResources().getString(R.string.red_notice));
-            mPassword.setHintTextColor(getResources().getColor(R.color.red));
+            mPassword.setHintTextColor(getResources().getColor(R.color.red, null));
             isSuitable = false;
         }
         if (isSuitable) {
@@ -104,24 +112,31 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (username.equals(managerAccount.get(i))) {
                     intent.putExtra(Constants.LOGIN, true);
                     startActivity(intent);
+                    isSuitable = false;
                     break;
                 }
             }
-            for(int i = 0; i< staffAccount.size(); i++){
+            for (int i = 0; i < staffAccount.size(); i++) {
                 if (username.equals(staffAccount.get(i))) {
                     intent.putExtra(Constants.LOGIN, false);
                     startActivity(intent);
+                    isSuitable = false;
                     break;
                 }
+            }
+            if (isSuitable) {
+                mWrongAccount.setVisibility(View.VISIBLE);
+            } else {
+                mWrongAccount.setVisibility(View.INVISIBLE);
             }
         }
     }
 
     private List getAccountList(boolean isManager) {
         List<String> accountLists = new ArrayList<>();
-        String savedString = RWManagerFile.readFromFile(isManager);
+        String savedString = rwManagerFile.readFromFile(isManager);
         StringTokenizer st = new StringTokenizer(savedString, "|");
-        while (st.hasMoreTokens()){
+        while (st.hasMoreTokens()) {
             accountLists.add(st.nextToken());
         }
         return accountLists;

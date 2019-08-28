@@ -7,6 +7,7 @@
     <color name="highchart">#a4e4fb</color>
     <color name="white">#ffffff</color>
     <color name="black">#111111</color>
+    <color name="dark">#8b8b8b</color>
     <color name="shortchart">#67f1af</color>
     <color name="red">#FF0000</color>
     <color name="hint_color">#999999</color>

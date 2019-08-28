@@ -2,21 +2,12 @@ package com.totnghiepluon.duancrm.data;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MyDatabase extends SQLiteOpenHelper {
     public MyDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
-    }
-
-    public MyDatabase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
-        super(context, name, factory, version, errorHandler);
-    }
-
-    public MyDatabase(Context context, String name, int version, SQLiteDatabase.OpenParams openParams) {
-        super(context, name, version, openParams);
     }
 
     @Override
@@ -34,8 +25,8 @@ public class MyDatabase extends SQLiteOpenHelper {
         database.execSQL(sql);
     }
 
-    public Cursor getData(String sql){
+    public Cursor getData(String sql) {
         SQLiteDatabase database = getReadableDatabase();
-        return database.rawQuery(sql,null);
+        return database.rawQuery(sql, null);
     }
 }

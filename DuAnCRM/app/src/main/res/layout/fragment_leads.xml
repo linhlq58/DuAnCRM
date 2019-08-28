@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="15dp"
-    android:paddingTop="15dp">
+    android:paddingStart="@dimen/dp_15"
+    android:paddingEnd="@dimen/dp_15"
+    android:paddingTop="@dimen/dp_15">
 
     <Button
         android:id="@+id/btn_add"
@@ -17,7 +18,7 @@
         android:gravity="center"
         android:text="+"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="@dimen/sp_30" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

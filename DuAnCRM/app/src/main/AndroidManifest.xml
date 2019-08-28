@@ -12,6 +12,7 @@
         <activity android:name=".MainHandle.MainActivity"/>
         <activity android:name=".AddCustomer"/>
         <activity android:name=".ContactData.ContactsActivity"/>
+        <activity android:name=".MainHandle.AccountManager"/>
         <activity android:name=".MainHandle.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -69,7 +69,7 @@ public class ContactsActivity extends BaseActivity implements LoaderManager.Load
     // Defines a variable for the search string
     private String searchString = "";
     // Defines the array to hold values that replace the ?
-    private String[] selectionArgs = { searchString };
+    private String[] selectionArgs = {searchString};
 
     // Define global mutable variables
     private ListView contactsList;
@@ -158,10 +158,8 @@ public class ContactsActivity extends BaseActivity implements LoaderManager.Load
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back:
-                finish();
-                break;
+        if (view.getId() == R.id.btn_back) {
+            finish();
         }
     }
 }

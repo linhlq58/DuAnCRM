@@ -33,7 +33,7 @@
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"
             android:text="Tiềm năng"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp_20"
             android:layout_marginStart="@dimen/dp_10"/>
 
     </RelativeLayout>
