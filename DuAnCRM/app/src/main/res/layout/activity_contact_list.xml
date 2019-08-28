@@ -25,12 +25,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select your customers"
+            android:text="Chọn tên người dùng của bạn"
             android:layout_toRightOf="@id/btn_back"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginStart="10dp"/>
 
     </RelativeLayout>
 

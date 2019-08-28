@@ -2,6 +2,7 @@ package com.totnghiepluon.duancrm.Graph;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +33,6 @@ import java.util.Random;
 
 public class GraphFragment extends BaseFragment {
 
-    public static GraphFragment createInstance() {
-
-        Bundle args = new Bundle();
-
-        GraphFragment fragment = new GraphFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     private BarChart barChart;
     private PieChart pieChart;
@@ -47,6 +40,7 @@ public class GraphFragment extends BaseFragment {
     private String mChartName;
     private XAxis x1;
     private YAxis y1;
+    private int sum;
     private Random random;
     public int[] colors = {
             Color.rgb(192, 255, 140), Color.rgb(255, 247, 140), Color.rgb(255, 208, 140),
@@ -55,6 +49,15 @@ public class GraphFragment extends BaseFragment {
     private GetDataFromPreference getData;
     private List<Integer> listMonth;
     private int length;
+
+    public static GraphFragment createInstance() {
+
+        Bundle args = new Bundle();
+
+        GraphFragment fragment = new GraphFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     protected int getLayoutResource() {
@@ -91,7 +94,7 @@ public class GraphFragment extends BaseFragment {
         pieChart.setUsePercentValues(true);
         barChart = container.findViewById(R.id.barChart);
         random = new Random();
-        mChartName = "pieChart";
+        mChartName = "Tỉ lệ giữa các tháng so với doanh thu";
         description = new Description();
         listMonth = new ArrayList<>();
         x1 = barChart.getXAxis();
@@ -104,9 +107,9 @@ public class GraphFragment extends BaseFragment {
         createData();
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
-        description.setText("Huy's chart");
+        description.setText("Doanh số các tháng từ đầu năm");
         barChart.setDescription(description);
-        barChart.setMaxVisibleValueCount(100);
+        barChart.setMaxVisibleValueCount(listMonth.get(5));
         barChart.setPinchZoom(false);
         barChart.setDrawGridBackground(true);
         x1.setGranularity(1f);
@@ -118,9 +121,12 @@ public class GraphFragment extends BaseFragment {
     }
 
     private void createData() {
-        length = random.nextInt(15) + 5;
+        length = 6;
+        int temp = 150;
         for (int i = 0; i < length; i++) {
-            listMonth.add(random.nextInt(200));
+            temp += random.nextInt(200 / (i + 1));
+            sum += temp;
+            listMonth.add(temp);
         }
         getData.doSave(listMonth, "a");
     }
@@ -145,7 +151,7 @@ public class GraphFragment extends BaseFragment {
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(yVal1, "first");
+            set1 = new BarDataSet(yVal1, "Số tiền");
             set1.setColor(getResources().getColor(R.color.shortchart));
             set2 = new BarDataSet(yVal2, "second");
             set2.setColor(getResources().getColor(R.color.highchart));
@@ -162,12 +168,13 @@ public class GraphFragment extends BaseFragment {
 
     private void drawPieChart() {
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-        yvalues.add(new PieEntry(8f, "January", 0));
-        yvalues.add(new PieEntry(15f, "February", 1));
-        yvalues.add(new PieEntry(12f, "March", 2));
-        yvalues.add(new PieEntry(25f, "April", 3));
-        yvalues.add(new PieEntry(23f, "May", 4));
-        PieDataSet dataSet = new PieDataSet(yvalues, "Results");
+        yvalues.add(new PieEntry((listMonth.get(0)*100/sum), "Một", 0));
+        yvalues.add(new PieEntry((listMonth.get(1)*100/sum), "Hai", 1));
+        yvalues.add(new PieEntry((listMonth.get(2)*100/sum), "Ba", 2));
+        yvalues.add(new PieEntry((listMonth.get(3)*100/sum), "Bốn", 3));
+        yvalues.add(new PieEntry((listMonth.get(4)*100/sum), "Năm", 4));
+        yvalues.add(new PieEntry((listMonth.get(5)*100/sum), "Sáu", 5));
+        PieDataSet dataSet = new PieDataSet(yvalues, "|Các tháng");
         PieData data = new PieData(dataSet);
 
         data.setValueFormatter(new PercentFormatter());

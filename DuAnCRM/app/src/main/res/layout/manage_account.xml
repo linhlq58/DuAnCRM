@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dp_10">
+
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_account"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="@string/add_account"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/change_pass"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="@string/change_password"
+            android:textColor="@color/dark" />
+
+        <Button
+            android:id="@+id/delete_account"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="@string/delete_account"
+            android:textColor="@color/dark" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_button"
+        android:layout_marginTop="@dimen/size_20"
+        android:paddingHorizontal="@dimen/size_20">
+
+        <TextView
+            android:id="@+id/text_user"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:text="@string/username_input"
+            android:textSize="@dimen/sp_30" />
+
+        <EditText
+            android:id="@+id/edt_user"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:layout_below="@id/text_user"
+            android:hint="@string/username_input"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/txt_pass1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_below="@id/edt_user"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/pass_input"
+            android:textSize="@dimen/sp_30" />
+
+        <EditText
+            android:id="@+id/edt_pass1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:layout_below="@id/txt_pass1"
+            android:hint="@string/pass_input"
+            android:inputType="textPassword"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/txt_pass2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_below="@id/edt_pass1"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="@string/reinput_pass"
+            android:textSize="@dimen/sp_30" />
+
+        <EditText
+            android:id="@+id/edt_pass2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:layout_below="@id/txt_pass2"
+            android:hint="@string/reinput_pass"
+            android:inputType="textPassword"
+            android:textSize="@dimen/sp_20" />
+
+        <CheckBox
+            android:id="@+id/check_box"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:layout_below="@id/edt_pass2"
+            android:layout_marginTop="@dimen/size_20"
+            android:button="@null"
+            android:foreground="@drawable/selector_checkbox"
+            android:foregroundGravity="center" />
+
+        <TextView
+            android:id="@+id/text_manage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_alignBottom="@id/check_box"
+            android:layout_marginStart="@dimen/size_20"
+            android:layout_toEndOf="@id/check_box"
+            android:gravity="bottom"
+            android:text="Quản lý?"
+            android:textSize="@dimen/sp_30" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txt_duplicate_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginTop="@dimen/height_50"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_20"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txt_duplicate_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_duplicate_pass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="@dimen/dp_30"
+        android:layout_marginTop="@dimen/size_20"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="@dimen/sp_20"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/manage_button"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20" />
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/manage_button"
+            android:text="Hoàn thành"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_20" />
+    </LinearLayout>
+</RelativeLayout>

@@ -11,8 +11,11 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,6 +30,7 @@ import com.totnghiepluon.duancrm.Leads.LeadsFragment;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.Tasks.TasksFragment;
 import com.totnghiepluon.duancrm.Base.BaseActivity;
+import com.totnghiepluon.duancrm.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -34,19 +38,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private DrawerLayout drawer;
     private TabLayout tabs;
     private ViewPager pager;
-    private TabsPagerAdapter pagerAdapter;
-
+    private boolean isManager;
     private RelativeLayout btnMenu;
     private TextView tvTitle;
 
-    private LeadsFragment leadsFragment;
-    private CustomersFragment customersFragment;
-    private LabelsFragment labelsFragment;
-    private TasksFragment tasksFragment;
-    private GraphFragment graphFragment;
-
-    private ArrayList<Fragment> listFragment;
-
+    private RelativeLayout btnManageAccount;
     private RelativeLayout btnImport;
 
     private static int PERMISSIONS_REQUEST_READ_CONTACTS = 1267;
@@ -63,15 +59,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         pager = findViewById(R.id.pager);
         btnMenu = findViewById(R.id.btn_menu);
         tvTitle = findViewById(R.id.tv_title);
-
+        isManager = getIntent().getBooleanExtra(Constants.LOGIN, false);
         btnImport = findViewById(R.id.btn_import);
+        btnManageAccount = findViewById(R.id.btn_acc_manage);
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
         createDrawerLayout();
         setupTabLayout();
-
+        if (!isManager){
+            btnManageAccount.setVisibility(View.GONE);
+        }
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,39 +87,50 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         }
 
         btnImport.setOnClickListener(this);
+        btnManageAccount.setOnClickListener(this);
     }
 
     private void setupTabLayout() {
         //Create Tablayout
-        leadsFragment = LeadsFragment.createInstance();
-        customersFragment = CustomersFragment.createInstance();
-        labelsFragment = LabelsFragment.createInstance();
-        tasksFragment = TasksFragment.createInstance();
-        graphFragment = GraphFragment.createInstance();
+        LeadsFragment leadsFragment = LeadsFragment.createInstance();
+        CustomersFragment customersFragment = CustomersFragment.createInstance();
+        LabelsFragment labelsFragment = LabelsFragment.createInstance();
+        TasksFragment tasksFragment = TasksFragment.createInstance();
+        GraphFragment graphFragment = GraphFragment.createInstance();
 
-        listFragment = new ArrayList<>();
+        ArrayList<Fragment> listFragment = new ArrayList<>();
         listFragment.add(leadsFragment);
         listFragment.add(customersFragment);
         listFragment.add(labelsFragment);
         listFragment.add(tasksFragment);
         listFragment.add(graphFragment);
 
-        pagerAdapter = new TabsPagerAdapter(getSupportFragmentManager(), listFragment);
+        TabsPagerAdapter pagerAdapter = new TabsPagerAdapter(getSupportFragmentManager(), listFragment);
         pager.setAdapter(pagerAdapter);
         pager.setOffscreenPageLimit(5);
 
         tabs.setupWithViewPager(pager);
 
         TabLayout.Tab tab1 = tabs.getTabAt(0);
-        tab1.setCustomView(createTabView(R.drawable.img_tab_leads, getResources().getString(R.string.string_leads)));
+        if (tab1 != null) {
+            tab1.setCustomView(createTabView(R.drawable.img_tab_leads, getResources().getString(R.string.string_leads)));
+        }
         TabLayout.Tab tab2 = tabs.getTabAt(1);
-        tab2.setCustomView(createTabView(R.drawable.img_tab_customers, getResources().getString(R.string.string_customers)));
+        if (tab2 != null) {
+            tab2.setCustomView(createTabView(R.drawable.img_tab_customers, getResources().getString(R.string.string_customers)));
+        }
         TabLayout.Tab tab3 = tabs.getTabAt(2);
-        tab3.setCustomView(createTabView(R.drawable.img_tab_labels, getResources().getString(R.string.string_labels)));
+        if (tab3 != null) {
+            tab3.setCustomView(createTabView(R.drawable.img_tab_labels, getResources().getString(R.string.string_labels)));
+        }
         TabLayout.Tab tab4 = tabs.getTabAt(3);
-        tab4.setCustomView(createTabView(R.drawable.img_tab_tasks, getResources().getString(R.string.string_tasks)));
+        if (tab4 != null) {
+            tab4.setCustomView(createTabView(R.drawable.img_tab_tasks, getResources().getString(R.string.string_tasks)));
+        }
         TabLayout.Tab tab5 = tabs.getTabAt(4);
-        tab5.setCustomView(createTabView(R.drawable.img_tab_graph, getResources().getString(R.string.string_graph)));
+        if (tab5 != null) {
+            tab5.setCustomView(createTabView(R.drawable.img_tab_graph, getResources().getString(R.string.string_graph)));
+        }
 
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
 
@@ -185,6 +195,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.btn_import:
                 startActivity(ContactsActivity.class);
                 break;
+            case R.id.btn_acc_manage:
+                startActivity(AccountManager.class);
         }
     }
 
@@ -192,8 +204,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission is granted
-
+                Log.d("Huybv","permission has been granted");
             } else {
                 finish();
             }

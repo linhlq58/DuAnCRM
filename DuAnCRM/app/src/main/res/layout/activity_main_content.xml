@@ -32,7 +32,8 @@
             android:layout_toEndOf="@id/btn_menu"
             android:layout_centerVertical="true"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:text="Tiềm năng"
+            android:textSize="@dimen/sp_20"
             android:layout_marginStart="@dimen/dp_10"/>
 
     </RelativeLayout>

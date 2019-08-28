@@ -16,41 +16,42 @@
             android:layout_height="60dp"
             android:src="@mipmap/ic_launcher"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginStart="@dimen/size_20" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/avatar"
             android:orientation="vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_toRightOf="@id/avatar">
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginBottom="@dimen/dp_30"
+            android:layout_toEndOf="@id/avatar">
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/avatar"
                 android:text="Lê Quyền Linh"
-                android:textSize="20sp"/>
+                android:textSize="@dimen/sp_20"/>
 
             <TextView
                 android:id="@+id/tv_position"
+                android:layout_below="@id/tv_name"
+                android:layout_marginTop="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/avatar"
                 android:text="Sale Manager" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@android:color/black"></View>
+        android:layout_height="1dp"
+        android:background="@android:color/black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -69,16 +70,16 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_customer"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp">
+                android:layout_marginStart="@dimen/size_20">
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Import Customers from Contacts"
+                android:text="Nhập người dùng từ danh bạ"
                 android:layout_toRightOf="@id/menu_1"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginStart="@dimen/size_20" />
 
         </RelativeLayout>
 
@@ -93,16 +94,16 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_customer"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp">
+                android:layout_marginStart="@dimen/size_20">
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account Management"
+                android:text="Quản lý tài khoản"
                 android:layout_toRightOf="@id/menu_2"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginStart="@dimen/size_20" />
 
         </RelativeLayout>
 
@@ -117,16 +118,16 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_customer"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp">
+                android:layout_marginStart="@dimen/size_20">
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact Us"
+                android:text="Liên hệ trợ giúp"
                 android:layout_toRightOf="@id/menu_3"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginStart="@dimen/size_20" />
 
         </RelativeLayout>
 
@@ -141,16 +142,16 @@
                 android:layout_height="30dp"
                 android:src="@drawable/ic_customer"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp">
+                android:layout_marginStart="@dimen/size_20">
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About"
+                android:text="Về chúng tôi"
                 android:layout_toRightOf="@id/menu_4"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp" />
+                android:layout_marginStart="@dimen/size_20" />
 
         </RelativeLayout>
 
