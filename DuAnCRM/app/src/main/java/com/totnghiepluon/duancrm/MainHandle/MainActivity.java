@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.totnghiepluon.duancrm.Base.StartApplication;
 import com.totnghiepluon.duancrm.ContactData.ContactsActivity;
 import com.totnghiepluon.duancrm.Customers.CustomersFragment;
 import com.totnghiepluon.duancrm.Graph.GraphFragment;
@@ -30,6 +31,7 @@ import com.totnghiepluon.duancrm.Leads.LeadsFragment;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.Tasks.TasksFragment;
 import com.totnghiepluon.duancrm.Base.BaseActivity;
+import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
 
 import java.util.ArrayList;
@@ -46,6 +48,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout btnImport;
 
     private static int PERMISSIONS_REQUEST_READ_CONTACTS = 1267;
+
+    private DatabaseHelper db;
 
     @Override
     protected int getLayoutResource() {
@@ -66,6 +70,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        initDb();
+
         createDrawerLayout();
         setupTabLayout();
         if (!isManager){
@@ -88,6 +94,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         btnImport.setOnClickListener(this);
         btnManageAccount.setOnClickListener(this);
+    }
+
+    private void initDb() {
+        db = new DatabaseHelper(this);
+        StartApplication.setDb(db);
     }
 
     private void setupTabLayout() {
@@ -208,6 +219,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             } else {
                 finish();
             }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (db != null) {
+            db.close();
         }
     }
 }

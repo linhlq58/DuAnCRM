@@ -3,30 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:background="@drawable/tasks" />
+    <RelativeLayout
+        android:id="@+id/rtl_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txt_lab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_task"
-        android:layout_centerHorizontal="true"
-        android:text="Hiện bạn chưa có nhiệm vụ nào"
-        android:textSize="@dimen/sp_20" />
+        <ImageView
+            android:id="@+id/img_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/tasks" />
 
-    <TextView
-        android:id="@+id/txt_lab1"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_lab"
-        android:layout_centerHorizontal="true"
+        <TextView
+            android:id="@+id/txt_lab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_task"
+            android:layout_centerHorizontal="true"
+            android:text="Hiện bạn chưa có nhiệm vụ nào"
+            android:textSize="@dimen/sp_20" />
+
+        <TextView
+            android:id="@+id/txt_lab1"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_lab"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Hãy liên hệ với người quản lý của bạn để nận nhiệm vụ mới!\n Chúc một ngày làm việc hiệu quả!"
+            android:textSize="@dimen/sp_20" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="@dimen/size_60"
+        android:layout_height="@dimen/size_60"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:layout_marginBottom="@dimen/dp_30"
+        android:background="@drawable/add_button"
         android:gravity="center"
-        android:text="Hãy liên hệ với người quản lý của bạn để nận nhiệm vụ mới!\n Chúc một ngày làm việc hiệu quả!"
-        android:textSize="@dimen/sp_20" />
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_30" />
 </RelativeLayout>
