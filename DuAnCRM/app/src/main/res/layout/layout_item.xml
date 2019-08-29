@@ -5,24 +5,60 @@
     android:background="@drawable/bg_item_selected_selector"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/size_40"
-        android:textColor="#000000"
-        android:textSize="@dimen/sp_30" />
+    <LinearLayout
+        android:id="@+id/lnIcons"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_below="@id/tv_name"
-        android:id="@+id/tv_company"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_30"
-        android:textSize="@dimen/sp_20" />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_call" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_sms" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_email" />
+
+    </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@drawable/co_bg_list_line"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/co_bg_list_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/lnIcons">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_40"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textColor="#000000"
+            android:textSize="@dimen/sp_30" />
+
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:layout_below="@id/tv_name"
+            android:layout_marginStart="@dimen/dp_10"
+            android:textSize="@dimen/sp_20" />
+    </RelativeLayout>
+
+
 </RelativeLayout>

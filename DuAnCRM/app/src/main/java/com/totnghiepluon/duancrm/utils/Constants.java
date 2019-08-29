@@ -5,6 +5,7 @@ public class Constants {
     public static final String USERNAME = "username";
     public static final String EDIT = "edit";
     public static final String MANAGER = "Manager";
+    public static final String MANAGER_NAME = "ManagerName";
     public static final String MANAGER_ACCOUNT = "admin,admin|huybv,123";
     public static final String STAFF_ACCOUNT = "s,s";
     public static final String LOGIN = "login";
@@ -15,7 +16,7 @@ public class Constants {
     public static final String ADDRESS = "Address";
     public static final String BIRTHDAY = "Birthday";
     public static final String PHONE_NUMBER = "Phone";
-    public static final String DATABASES= "duan.sqlite";
+    public static final String DATABASES = "duan.sqlite";
     public static final int ADD_NEW_ACCOUNT = 1;
     public static final int EDIT_ACCOUNT = 2;
     public static final int DELETE_ACCOUNT = 3;
@@ -24,7 +25,9 @@ public class Constants {
     public static final String RETYPE_EXISTED_STRING = "Tài khoản đã tồn tại, vui lòng nhập lại";
     public static final String STAFF_FILE = "account.txt";
     public static final String MANAGER_FILE = "maccount.txt";
-    public static final String CUSTOMER_LABEL[] = {"Khách tiềm năng","Khách chưa giao dịch"
-            ,"Khác đã hợp đồng","Khách đã giao dịch","Khách quen"};
+    public static final String CUSTOMER_LABEL[] = {"Khách tiềm năng", "Khách chưa giao dịch"
+            , "Khách đã hợp đồng", "Khách đã giao dịch", "Khách quen"};
+    public static final String CUSTOMER_LABEL1[] = {"KTN", "KCGD"
+            , "KĐHĐ", "KĐGD", "VIP"};
     public static final String LABEL = "Khách quen";
 }

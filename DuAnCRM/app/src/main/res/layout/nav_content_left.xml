@@ -68,7 +68,7 @@
                 android:id="@+id/menu_1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_customer"
+                android:src="@drawable/document_import"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>
@@ -89,6 +89,7 @@
             android:layout_height="60dp">
 
             <ImageView
+                android:alpha="0.6"
                 android:id="@+id/menu_2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -116,7 +117,7 @@
                 android:id="@+id/menu_3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_customer"
+                android:src="@drawable/co_ic_menu_help"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>
@@ -139,8 +140,9 @@
             <ImageView
                 android:id="@+id/menu_4"
                 android:layout_width="30dp"
+                android:alpha="0.6"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_customer"
+                android:src="@drawable/co_ic_popup_info"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>

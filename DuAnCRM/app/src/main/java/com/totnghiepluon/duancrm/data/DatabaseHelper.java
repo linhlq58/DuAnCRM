@@ -150,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<CustomerInfo> listMessage = new ArrayList<>();
 
         String query = "SELECT * FROM " + TABLE_CUSTOMER
-                + " WHERE " + KEY_IS_CUSTOMER + " = 1";
+                + " WHERE " + KEY_IS_CUSTOMER + " = 1 ORDER BY " + KEY_LABEL;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
@@ -200,9 +200,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-
         cursor.close();
-
         return listMessage;
     }
 

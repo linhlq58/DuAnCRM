@@ -43,7 +43,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private boolean isManager;
     private RelativeLayout btnMenu;
     private TextView tvTitle;
+    private TextView tvName;
     private String user;
+    private TextView tv_position;
     private RelativeLayout btnManageAccount;
     private RelativeLayout btnImport;
 
@@ -62,6 +64,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         drawer = findViewById(R.id.drawer_layout);
         tabs = findViewById(R.id.tabs);
         pager = findViewById(R.id.pager);
+        tvName = findViewById(R.id.tv_name);
+        tv_position = findViewById(R.id.tv_position);
         btnMenu = findViewById(R.id.btn_menu);
         tvTitle = findViewById(R.id.tv_title);
         isManager = getIntent().getBooleanExtra(Constants.LOGIN, false);
@@ -75,6 +79,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         initDb();
         createDrawerLayout();
         setupTabLayout();
+        if(user.equals(Constants.MANAGER)){
+            tvName.setText(getIntent().getStringExtra(Constants.MANAGER_NAME));
+            tv_position.setText("Sale Manager");
+        }else {
+            tvName.setText(user);
+            tv_position.setText("Sale staff");
+        }
         if (!isManager) {
             btnManageAccount.setVisibility(View.GONE);
         }
