@@ -1,4 +1,4 @@
-package com.totnghiepluon.duancrm.Tasks;
+package com.totnghiepluon.duancrm.Customers;
 
 import android.app.Activity;
 import android.view.View;
@@ -13,24 +13,24 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskViewHolder> {
+public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapter.CustomerViewHolder> {
     private Activity context;
     private ArrayList<CustomerInfo> listCustomer;
 
-    public ListTaskAdapter(Activity context, ArrayList<CustomerInfo> listCustomer) {
+    public ListCustomerAdapter(Activity context, ArrayList<CustomerInfo> listCustomer) {
         this.context = context;
         this.listCustomer = listCustomer;
     }
 
     @NonNull
     @Override
-    public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = context.getLayoutInflater().inflate(R.layout.item_task, parent, false);
-        return new TaskViewHolder(itemView);
+    public CustomerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = context.getLayoutInflater().inflate(R.layout.item_customer, parent, false);
+        return new CustomerViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomerViewHolder holder, int position) {
         String nameCompany = listCustomer.get(position).getmName() + " (" + listCustomer.get(position).getmCompany() + ")";
         holder.tvName.setText(nameCompany);
     }
@@ -45,10 +45,10 @@ public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskVi
         notifyDataSetChanged();
     }
 
-    public class TaskViewHolder extends RecyclerView.ViewHolder {
+    public class CustomerViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName;
 
-        public TaskViewHolder(@NonNull View itemView) {
+        public CustomerViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tv_name);

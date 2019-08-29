@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.totnghiepluon.duancrm.AddCustomer;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
 import com.totnghiepluon.duancrm.Base.StartApplication;
-import com.totnghiepluon.duancrm.Customers.CustomerInfo;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;

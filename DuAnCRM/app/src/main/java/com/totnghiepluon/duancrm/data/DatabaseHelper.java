@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.totnghiepluon.duancrm.Customers.CustomerInfo;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
 
 import java.util.ArrayList;
 

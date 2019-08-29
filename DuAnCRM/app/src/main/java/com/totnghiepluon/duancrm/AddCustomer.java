@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.totnghiepluon.duancrm.Base.BaseActivity;
 import com.totnghiepluon.duancrm.Base.StartApplication;
-import com.totnghiepluon.duancrm.Customers.CustomerInfo;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
 

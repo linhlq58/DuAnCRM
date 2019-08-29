@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    card_view:cardCornerRadius="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/lnIcons"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/img_type"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_customer_selected"
+                android:layout_centerVertical="true"></ImageView>
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/img_type"
+                android:text="Linka (FPT)"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginLeft="20dp"
+                android:textSize="18sp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_label"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="Đã giao dịch"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/img_type"
+                android:layout_alignParentBottom="true"></TextView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/lnIcons"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_call"
+                android:layout_marginRight="20dp"></ImageView>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_sms"
+                android:layout_marginRight="20dp"></ImageView>
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_email"></ImageView>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

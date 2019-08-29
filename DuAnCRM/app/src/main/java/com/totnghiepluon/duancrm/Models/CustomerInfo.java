@@ -1,4 +1,4 @@
-package com.totnghiepluon.duancrm.Customers;
+package com.totnghiepluon.duancrm.Models;
 
 public class CustomerInfo {
     private String mName;

@@ -1,9 +1,7 @@
 package com.totnghiepluon.duancrm.Leads;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,13 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.totnghiepluon.duancrm.AddCustomer;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
-import com.totnghiepluon.duancrm.Customers.CustomerInfo;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.adapter.MyAdapter;
 import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LeadsFragment extends BaseFragment implements View.OnClickListener {
