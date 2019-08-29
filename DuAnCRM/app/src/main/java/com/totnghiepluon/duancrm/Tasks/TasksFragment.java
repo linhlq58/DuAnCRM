@@ -77,8 +77,7 @@ public class TasksFragment extends BaseFragment implements View.OnClickListener 
     }
 
     private void changeActivity() {
-        Intent intent = new Intent(getActivity(), AddCustomer.class);
-        intent.putExtra(Constants.EXTRAS, false);
+        Intent intent = new Intent(getActivity(), AddTaskActivity.class);
         startActivityForResult(intent, 0);
     }
 
