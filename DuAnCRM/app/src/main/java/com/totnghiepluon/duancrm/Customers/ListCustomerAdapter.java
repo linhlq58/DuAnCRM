@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
+import com.totnghiepluon.duancrm.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,8 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
     @Override
     public void onBindViewHolder(@NonNull CustomerViewHolder holder, final int position) {
         String nameCompany = listCustomer.get(position).getmName() + " (" + listCustomer.get(position).getmCompany() + ")";
+        int payState = listCustomer.get(position).getmPriority();
+        holder.tvState.setText(Constants.CUSTOMER_LABEL[payState]);
         holder.tvName.setText(nameCompany);
 
         holder.btnCall.setOnClickListener(new View.OnClickListener() {
@@ -75,13 +78,14 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
 
     public class CustomerViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName;
+        private TextView tvState;
         private ImageView btnCall;
         private ImageView btnSms;
         private ImageView btnEmail;
 
         public CustomerViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            tvState = itemView.findViewById(R.id.pay_state);
             tvName = itemView.findViewById(R.id.tv_name);
             btnCall = itemView.findViewById(R.id.btn_call);
             btnSms = itemView.findViewById(R.id.btn_sms);

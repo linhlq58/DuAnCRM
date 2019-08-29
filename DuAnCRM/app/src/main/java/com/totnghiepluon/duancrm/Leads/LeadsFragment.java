@@ -25,7 +25,6 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
     private DatabaseHelper db;
     private MyAdapter myAdapter;
     private List<CustomerInfo> customerInfoList;
-    private int mSelectedPosition;
     private String username;
 
     public static LeadsFragment createInstance() {
@@ -63,14 +62,12 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
         myAdapter.setOnItemSelectedListener(new MyAdapter.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int position) {
-                mSelectedPosition = position;
                 editCustomer(position);
             }
         });
         myAdapter.setOnItemLongClickListener(new MyAdapter.OnItemLongClickListener() {
             @Override
             public void onItemLongClicked(int position) {
-                mSelectedPosition = position;
             }
         });
         recyclerView.setAdapter(myAdapter);
