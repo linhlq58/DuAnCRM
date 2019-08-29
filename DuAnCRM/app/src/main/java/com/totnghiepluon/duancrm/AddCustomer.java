@@ -1,5 +1,7 @@
 package com.totnghiepluon.duancrm;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,7 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.totnghiepluon.duancrm.Base.BaseActivity;
+import com.totnghiepluon.duancrm.Base.StartApplication;
 import com.totnghiepluon.duancrm.MainHandle.MainActivity;
+import com.totnghiepluon.duancrm.Models.Customer;
+import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.data.MyDatabase;
 import com.totnghiepluon.duancrm.utils.Constants;
 
@@ -23,7 +28,7 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
     private EditText mEdtBirthday;
     private EditText mEdtEmail;
     private boolean isAddCustomer;
-    private MyDatabase database;
+    private DatabaseHelper db;
 
     @Override
     protected int getLayoutResource() {
@@ -46,6 +51,8 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        db = StartApplication.getDb();
+
         if (!isAddCustomer) {
             label.setText(getResources().getString(R.string.add_leader));
             label.setTextSize(19);
@@ -56,16 +63,21 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
         mBtnFinish.setOnClickListener(this);
     }
 
-    private void queryDB() {
-        //create DB
-        database = new MyDatabase(this, Constants.DATABASES, null, 1);
-        //create table
-        database.query("INSERT INTO " + Constants.TABLE_NAME + " VALUES(NULL, '" + mEdtName.getText().toString() +
-                "', '" + mEdtPhone.getText().toString() +
-                "', '" + mEdtCompany.getText().toString() +
-                "', '" + mEdtEmail.getText().toString() +
-                "', '" + mEdtLocation.getText().toString() +
-                "', '" + mEdtBirthday.getText().toString() + "') ");
+    private void addNewCustomer() {
+        Customer customer = new Customer();
+        customer.setName(mEdtName.getText().toString());
+        customer.setPhoneNumber(mEdtPhone.getText().toString());
+        customer.setCompany(mEdtCompany.getText().toString());
+        customer.setEmail(mEdtEmail.getText().toString());
+        customer.setAddress(mEdtLocation.getText().toString());
+        customer.setBirthDay(mEdtBirthday.getText().toString());
+        customer.setLabel(0);
+
+        if (isAddCustomer) {
+            db.addCustomer(customer);
+        } else {
+            db.addLead(customer);
+        }
     }
 
     @Override
@@ -75,7 +87,9 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.btn_check:
-                queryDB();
+                addNewCustomer();
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_OK, returnIntent);
                 finish();
                 break;
         }
