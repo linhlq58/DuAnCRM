@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout btnImport;
 
     private static int PERMISSIONS_REQUEST_READ_CONTACTS = 1267;
+    private static int PERMISSIONS_REQUEST_CALL_PHONE = 3561;
 
     private DatabaseHelper db;
 
@@ -90,6 +91,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_READ_CONTACTS);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST_CALL_PHONE);
         }
 
         btnImport.setOnClickListener(this);
@@ -217,6 +222,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("Huybv", "permission has been granted");
+            } else {
+                finish();
+            }
+        }
+
+        if (requestCode == PERMISSIONS_REQUEST_CALL_PHONE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("Huybv", "permission has been granted");
             } else {
