@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.totnghiepluon.duancrm.Base.BaseActivity;
@@ -33,6 +36,8 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
     private Button delete;
     private Button makeCustomer;
     private String username;
+    private Spinner dropDown;
+    private RelativeLayout rlDropDown;
 
     @Override
     protected int getLayoutResource() {
@@ -57,16 +62,23 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
         isAddCustomer = getIntent().getBooleanExtra(Constants.EXTRAS, false);
         username = getIntent().getStringExtra(Constants.USERNAME);
         editCustomer = getIntent().getIntExtra(Constants.EDIT, -1);
+        dropDown = findViewById(R.id.spinner1);
+        rlDropDown = findViewById(R.id.layout_dropdown);
+
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-
+        String[] items = new String[]{"Chưa giao dịch", "Có hợp đồng", "Đã trả tiền", "Khách quen"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_dropdown_item, items);
+        dropDown.setAdapter(adapter);
         if (!isAddCustomer) {
             label.setText(getResources().getString(R.string.add_leader));
             label.setTextSize(19);
         } else {
             label.setText(getResources().getString(R.string.add_customer));
+            rlDropDown.setVisibility(View.VISIBLE);
         }
         if (editCustomer > -1) {
             editLayout.setVisibility(View.VISIBLE);
@@ -79,9 +91,10 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
             mEdtPhone.setText(customerInfo.getmPhoneNumber());
             makeCustomer.setOnClickListener(this);
             delete.setOnClickListener(this);
-            Log.d("Huybv","Customer owner: " + customerInfo.getmOwner());
+            dropDown.setVisibility(View.GONE);
             if (isAddCustomer) {
                 makeCustomer.setVisibility(View.GONE);
+                rlDropDown.setVisibility(View.VISIBLE);
             }
         } else {
             editLayout.setVisibility(View.INVISIBLE);
@@ -90,12 +103,16 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
         mBtnFinish.setOnClickListener(this);
     }
 
-    private void addNewCustomer() {
+    private void addNewCustomer(boolean isAddCustomer) {
+        int priority = 0;
+        if (isAddCustomer && dropDown != null) {
+            priority = dropDown.getSelectedItemPosition() + 1;
+        }
         CustomerInfo customer = new CustomerInfo(mEdtName.getText().toString(), mEdtPhone.getText().toString()
                 , mEdtCompany.getText().toString(), mEdtEmail.getText().toString(),
                 mEdtLocation.getText().toString(), mEdtBirthday.getText().toString(),
-                0, 0, username);
-        if (isAddCustomer) {
+                priority, 0, username);
+        if (this.isAddCustomer) {
             db.addCustomer(customer);
         } else {
             db.addLead(customer);
@@ -110,7 +127,7 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
                 break;
             case R.id.btn_check:
                 if (editCustomer == -1) {
-                    addNewCustomer();
+                    addNewCustomer(isAddCustomer);
                 } else {
                     editCustomerinfo();
                 }

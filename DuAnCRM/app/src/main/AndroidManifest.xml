@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainHandle.LoginActivity"/>
         <activity android:name=".AddCustomer"/>
+        <activity android:name=".Labels.LabelActivity"/>
         <activity android:name=".ContactData.ContactsActivity"/>
         <activity android:name=".MainHandle.AccountManager"/>
         <activity android:name=".MainHandle.MainActivity">

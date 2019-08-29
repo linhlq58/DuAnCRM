@@ -24,4 +24,7 @@ public class Constants {
     public static final String RETYPE_EXISTED_STRING = "Tài khoản đã tồn tại, vui lòng nhập lại";
     public static final String STAFF_FILE = "account.txt";
     public static final String MANAGER_FILE = "maccount.txt";
+    public static final String CUSTOMER_LABEL[] = {"Khách tiềm năng","Khách chưa giao dịch"
+            ,"Khác đã hợp đồng","Khách đã giao dịch","Khách quen"};
+    public static final String LABEL = "Khách quen";
 }
