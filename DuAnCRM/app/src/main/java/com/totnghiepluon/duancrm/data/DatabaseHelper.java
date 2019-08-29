@@ -22,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_ADDRESS = "address";
     private static final String KEY_BIRTHDAY = "birthday";
     private static final String KEY_LABEL = "label";
+    private static final String Key_OWNER = "owner";
     private static final String KEY_IS_CUSTOMER = "is_customer";
 
     public DatabaseHelper(Context context) {
@@ -39,8 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_ADDRESS + " TEXT, "
                 + KEY_BIRTHDAY + " TEXT, "
                 + KEY_LABEL + " INTEGER, "
-                + KEY_IS_CUSTOMER + " INTEGER)";
-
+                + KEY_IS_CUSTOMER + " INTEGER,"
+                + Key_OWNER + " TEXT)";
         db.execSQL(CREATE_CUSTOMER_TABLE);
     }
 
@@ -63,6 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_BIRTHDAY, customer.getmBirthday());
         values.put(KEY_LABEL, customer.getmPriority());
         values.put(KEY_IS_CUSTOMER, 0);
+        values.put(Key_OWNER, customer.getmOwner());
         db.insert(TABLE_CUSTOMER, null, values);
         db.setTransactionSuccessful();
         db.endTransaction();
@@ -82,9 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_BIRTHDAY, customer.getmBirthday());
         values.put(KEY_LABEL, customer.getmPriority());
         values.put(KEY_IS_CUSTOMER, 1);
-
+        values.put(Key_OWNER, customer.getmOwner());
         db.insert(TABLE_CUSTOMER, null, values);
-
         db.setTransactionSuccessful();
         db.endTransaction();
     }
@@ -100,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
                         , cursor.getString(3), cursor.getString(4), cursor.getString(5)
-                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(0));
+                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(0), cursor.getString(9));
                 if (cursor.getInt(8) == 0) {
                     customer.setCustomer(false);
                 } else {
@@ -108,6 +109,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 }
 
                 listMessage.add(customer);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return listMessage;
+    }
+
+    public ArrayList<CustomerInfo> getLeadByUser(String username) {
+        ArrayList<CustomerInfo> listMessage = new ArrayList<>();
+        String query = "SELECT * FROM " + TABLE_CUSTOMER
+                + " WHERE " + KEY_IS_CUSTOMER + " = 0";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getString(9).equals(username)) {
+                    CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
+                            , cursor.getString(3), cursor.getString(4), cursor.getString(5)
+                            , cursor.getString(6), cursor.getInt(7), cursor.getInt(0), cursor.getString(9));
+                    if (cursor.getInt(8) == 0) {
+                        customer.setCustomer(false);
+                    } else {
+                        customer.setCustomer(true);
+                    }
+
+                    listMessage.add(customer);
+                }
             } while (cursor.moveToNext());
         }
 
@@ -129,7 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
                         , cursor.getString(3), cursor.getString(4), cursor.getString(5)
-                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(8));
+                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getString(9));
                 if (cursor.getInt(8) == 0) {
                     customer.setCustomer(false);
                 } else {
@@ -170,6 +200,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 } else {
                     customer.setCustomer(true);
                 }
+                customer.setmOwner(cursor.getString(9));
             } while (cursor.moveToNext());
         }
 
@@ -203,6 +234,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_BIRTHDAY, customer.getmBirthday());
         values.put(KEY_LABEL, customer.getmPriority());
         values.put(KEY_IS_CUSTOMER, customer.isCustomer() ? 1 : 0);
+        values.put(Key_OWNER, customer.getmOwner());
 
         int i = db.update(TABLE_CUSTOMER, values, KEY_ID + " = ?",
                 new String[]{String.valueOf(customer.getmID())});

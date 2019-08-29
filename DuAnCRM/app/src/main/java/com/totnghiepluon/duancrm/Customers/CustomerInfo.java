@@ -5,6 +5,7 @@ public class CustomerInfo {
     private String mCompany;
     private String mPhoneNumber;
     private String mLocation;
+    private String mOwner;
     private String mEmail;
     private String mBirthday;
     private int mPriority;
@@ -22,8 +23,10 @@ public class CustomerInfo {
         isCustomer = customer;
     }
 
-    public CustomerInfo(String mName, String mPhoneNumber, String mCompany, String mLocation, String mEmail, String mBirthday, int mPriority, int ID) {
+    public CustomerInfo(String mName, String mPhoneNumber, String mCompany, String mLocation,
+                        String mEmail, String mBirthday, int mPriority, int ID, String owner) {
         this.mName = mName;
+        this.mOwner = owner;
         this.mCompany = mCompany;
         this.mPhoneNumber = mPhoneNumber;
         this.mLocation = mLocation;
@@ -39,6 +42,14 @@ public class CustomerInfo {
 
     public void setmCompany(String mCompany) {
         this.mCompany = mCompany;
+    }
+
+    public String getmOwner() {
+        return mOwner;
+    }
+
+    public void setmOwner(String mOwner) {
+        this.mOwner = mOwner;
     }
 
     public void setmPhoneNumber(String mPhoneNumber) {

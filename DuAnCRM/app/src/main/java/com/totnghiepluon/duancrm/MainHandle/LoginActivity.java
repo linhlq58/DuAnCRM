@@ -107,10 +107,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             isSuitable = false;
         }
         if (isSuitable) {
+            String account = username;
             username = username + "," + password;
             for (int i = 0; i < managerAccount.size(); i++) {
                 if (username.equals(managerAccount.get(i))) {
                     intent.putExtra(Constants.LOGIN, true);
+                    intent.putExtra(Constants.USERNAME, Constants.MANAGER);
                     startActivity(intent);
                     isSuitable = false;
                     break;
@@ -119,6 +121,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             for (int i = 0; i < staffAccount.size(); i++) {
                 if (username.equals(staffAccount.get(i))) {
                     intent.putExtra(Constants.LOGIN, false);
+                    intent.putExtra(Constants.USERNAME, account);
                     startActivity(intent);
                     isSuitable = false;
                     break;

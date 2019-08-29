@@ -32,6 +32,7 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
     private int editCustomer;
     private Button delete;
     private Button makeCustomer;
+    private String username;
 
     @Override
     protected int getLayoutResource() {
@@ -54,6 +55,7 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
         mEdtEmail = findViewById(R.id.edt_email);
         mEdtPhone = findViewById(R.id.edt_phone);
         isAddCustomer = getIntent().getBooleanExtra(Constants.EXTRAS, false);
+        username = getIntent().getStringExtra(Constants.USERNAME);
         editCustomer = getIntent().getIntExtra(Constants.EDIT, -1);
     }
 
@@ -77,6 +79,7 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
             mEdtPhone.setText(customerInfo.getmPhoneNumber());
             makeCustomer.setOnClickListener(this);
             delete.setOnClickListener(this);
+            Log.d("Huybv","Customer owner: " + customerInfo.getmOwner());
             if (isAddCustomer) {
                 makeCustomer.setVisibility(View.GONE);
             }
@@ -89,8 +92,9 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
 
     private void addNewCustomer() {
         CustomerInfo customer = new CustomerInfo(mEdtName.getText().toString(), mEdtPhone.getText().toString()
-                , mEdtCompany.getText().toString(), mEdtEmail.getText().toString(), mEdtLocation.getText().toString(), mEdtBirthday.getText().toString(),
-                0, 0);
+                , mEdtCompany.getText().toString(), mEdtEmail.getText().toString(),
+                mEdtLocation.getText().toString(), mEdtBirthday.getText().toString(),
+                0, 0, username);
         if (isAddCustomer) {
             db.addCustomer(customer);
         } else {

@@ -29,6 +29,7 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
     private MyAdapter myAdapter;
     private List<CustomerInfo> customerInfoList;
     private int mSelectedPosition;
+    private String username;
 
     public static LeadsFragment createInstance() {
 
@@ -49,6 +50,10 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
         mAddLead = rootView.findViewById(R.id.btn_add);
         db = new DatabaseHelper(getActivity());
         recyclerView = rootView.findViewById(R.id.recyclerview);
+        if (getArguments() != null) {
+            username = getArguments().getString(Constants.USERNAME, Constants.MANAGER);
+            Log.d("Huybv", "initVariables: " + username);
+        }
     }
 
     @Override
@@ -56,7 +61,7 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
         mAddLead.setOnClickListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        customerInfoList = db.getAllLeads();
+        getListLeadByUser();
         myAdapter = new MyAdapter(customerInfoList, getActivity());
         myAdapter.setOnItemSelectedListener(new MyAdapter.OnItemSelectedListener() {
             @Override
@@ -75,6 +80,13 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
         myAdapter.notifyDataSetChanged();
     }
 
+    private void getListLeadByUser() {
+        if (username.equals(Constants.MANAGER)) {
+            customerInfoList = db.getAllLeads();
+        } else
+            customerInfoList = db.getLeadByUser(username);
+    }
+
     private void editCustomer(int position) {
         Intent intent = new Intent(getActivity(), AddCustomer.class);
         intent.putExtra(Constants.EDIT, position + 1);
@@ -85,7 +97,7 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
     public void onResume() {
         super.onResume();
 //        database.query("INSERT INTO " + Constants.TABLE_NAME + " VALUES(NULL, '" + strings[2] + "')");
-        customerInfoList = db.getAllLeads();
+        getListLeadByUser();
         myAdapter.updateList(customerInfoList);
         myAdapter.notifyDataSetChanged();
     }
@@ -104,6 +116,7 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
     private void changeActivity() {
         Intent intent = new Intent(getActivity(), AddCustomer.class);
         intent.putExtra(Constants.EXTRAS, false);
+        intent.putExtra(Constants.USERNAME, username);
         startActivity(intent);
     }
 }

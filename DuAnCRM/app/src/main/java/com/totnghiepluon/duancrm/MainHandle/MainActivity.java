@@ -43,7 +43,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private boolean isManager;
     private RelativeLayout btnMenu;
     private TextView tvTitle;
-
+    private String user;
     private RelativeLayout btnManageAccount;
     private RelativeLayout btnImport;
 
@@ -64,6 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         btnMenu = findViewById(R.id.btn_menu);
         tvTitle = findViewById(R.id.tv_title);
         isManager = getIntent().getBooleanExtra(Constants.LOGIN, false);
+        user = getIntent().getStringExtra(Constants.USERNAME);
         btnImport = findViewById(R.id.btn_import);
         btnManageAccount = findViewById(R.id.btn_acc_manage);
     }
@@ -71,10 +72,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initData(Bundle savedInstanceState) {
         initDb();
-
         createDrawerLayout();
         setupTabLayout();
-        if (!isManager){
+        if (!isManager) {
             btnManageAccount.setVisibility(View.GONE);
         }
         btnMenu.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +94,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         btnImport.setOnClickListener(this);
         btnManageAccount.setOnClickListener(this);
+
     }
 
     private void initDb() {
@@ -103,12 +104,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void setupTabLayout() {
         //Create Tablayout
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.USERNAME, user);
+// set Fragmentclass Arguments
         LeadsFragment leadsFragment = LeadsFragment.createInstance();
+        leadsFragment.setArguments(bundle);
         CustomersFragment customersFragment = CustomersFragment.createInstance();
         LabelsFragment labelsFragment = LabelsFragment.createInstance();
         TasksFragment tasksFragment = TasksFragment.createInstance();
         GraphFragment graphFragment = GraphFragment.createInstance();
-
         ArrayList<Fragment> listFragment = new ArrayList<>();
         listFragment.add(leadsFragment);
         listFragment.add(customersFragment);
@@ -186,7 +190,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         ImageView tabsIcon = itemView.findViewById(R.id.tabs_icon);
         TextView tabsName = itemView.findViewById(R.id.tabs_text);
-
         tabsIcon.setImageResource(imgRes);
         tabsName.setText(name);
 
@@ -215,11 +218,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST_READ_CONTACTS) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("Huybv","permission has been granted");
+                Log.d("Huybv", "permission has been granted");
             } else {
                 finish();
             }
         }
+    }
+
+    public String getUser() {
+        return user;
     }
 
     @Override
