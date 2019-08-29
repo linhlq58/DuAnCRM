@@ -175,6 +175,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return listMessage;
     }
 
+    public ArrayList<CustomerInfo> getCustomerbyUser(String username) {
+        ArrayList<CustomerInfo> listMessage = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_CUSTOMER
+                + " WHERE " + KEY_IS_CUSTOMER + " = 1";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getString(9).equals(username)) {
+                    CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
+                            , cursor.getString(3), cursor.getString(4), cursor.getString(5)
+                            , cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getString(9));
+                    if (cursor.getInt(8) == 0) {
+                        customer.setCustomer(false);
+                    } else {
+                        customer.setCustomer(true);
+                    }
+
+                    listMessage.add(customer);
+                }
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return listMessage;
+    }
+
     public CustomerInfo getCustomerById(int id) {
         CustomerInfo customer = new CustomerInfo();
 
