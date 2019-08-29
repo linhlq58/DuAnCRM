@@ -19,7 +19,7 @@ public class MyDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-
+    
     public void query(String sql) {
         SQLiteDatabase database = getWritableDatabase();
         database.execSQL(sql);

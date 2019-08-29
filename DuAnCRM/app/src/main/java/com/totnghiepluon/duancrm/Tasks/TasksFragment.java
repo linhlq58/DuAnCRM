@@ -3,7 +3,6 @@ package com.totnghiepluon.duancrm.Tasks;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -11,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.totnghiepluon.duancrm.AddCustomer;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
 import com.totnghiepluon.duancrm.Base.StartApplication;
-import com.totnghiepluon.duancrm.Models.Customer;
+import com.totnghiepluon.duancrm.Customers.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
 import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
@@ -29,7 +28,7 @@ public class TasksFragment extends BaseFragment implements View.OnClickListener 
     private ListTaskAdapter listTaskAdapter;
     private Button btnAdd;
 
-    private ArrayList<Customer> listTask;
+    private ArrayList<CustomerInfo> listTask;
 
     public static TasksFragment createInstance() {
 
@@ -58,12 +57,9 @@ public class TasksFragment extends BaseFragment implements View.OnClickListener 
 
         listTask = db.getAllLeads();
         listTaskAdapter = new ListTaskAdapter(getActivity() , listTask);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(listTaskAdapter);
-
         btnAdd.setOnClickListener(this);
-
         checkEmpty();
     }
 

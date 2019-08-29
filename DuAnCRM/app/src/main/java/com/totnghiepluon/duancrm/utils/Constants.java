@@ -2,6 +2,7 @@ package com.totnghiepluon.duancrm.utils;
 
 public class Constants {
     public static final String EXTRAS = "add";
+    public static final String EDIT = "edit";
     public static final String MANAGER_ACCOUNT = "admin,admin|huybv,123";
     public static final String STAFF_ACCOUNT = "s,s";
     public static final String LOGIN = "login";

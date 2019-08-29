@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.totnghiepluon.duancrm.Models.Customer;
+import com.totnghiepluon.duancrm.Customers.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskViewHolder> {
     private Activity context;
-    private ArrayList<Customer> listCustomer;
+    private ArrayList<CustomerInfo> listCustomer;
 
-    public ListTaskAdapter(Activity context, ArrayList<Customer> listCustomer) {
+    public ListTaskAdapter(Activity context, ArrayList<CustomerInfo> listCustomer) {
         this.context = context;
         this.listCustomer = listCustomer;
     }
@@ -31,7 +31,7 @@ public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskVi
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-        String nameCompany = listCustomer.get(position).getName() + " (" + listCustomer.get(position).getCompany() + ")";
+        String nameCompany = listCustomer.get(position).getmName() + " (" + listCustomer.get(position).getmCompany() + ")";
         holder.tvName.setText(nameCompany);
     }
 
@@ -40,7 +40,7 @@ public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskVi
         return listCustomer.size();
     }
 
-    public void refreshData(ArrayList<Customer> listCustomer) {
+    public void refreshData(ArrayList<CustomerInfo> listCustomer) {
         this.listCustomer = listCustomer;
         notifyDataSetChanged();
     }

@@ -19,6 +19,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomerHolder> {
     private List<CustomerInfo> customerInfoList;
     private Context context;
     private LayoutInflater inflater;
+    private OnItemSelectedListener mOnItemSelectedListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
     public MyAdapter(List<CustomerInfo> customerInfoList, Context context) {
         this.customerInfoList = customerInfoList;
@@ -35,21 +37,22 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomerHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomerHolder holder, int position) {
-        Log.d("huybv", customerInfoList.get(position).getmID() + "");
+    public void onBindViewHolder(@NonNull CustomerHolder holder, final int position) {
         holder.company.setText(customerInfoList.get(position).getmCompany());
         holder.name.setText(customerInfoList.get(position).getmName());
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Log.d("Huybv","long clicked");
-                return false;
+                if(mOnItemLongClickListener == null) return false;
+                mOnItemLongClickListener.onItemLongClicked(position);
+                return true;
             }
         });
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Huybv","Clicked");
+                if(mOnItemSelectedListener == null) return;
+                mOnItemSelectedListener.onItemSelected(position);
             }
         });
     }
@@ -63,6 +66,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomerHolder> {
         this.customerInfoList = customerInfoList;
     }
 
+    public void setOnItemSelectedListener(OnItemSelectedListener listener) {
+        mOnItemSelectedListener = listener;
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener longClickListener) {
+        mOnItemLongClickListener = longClickListener;
+    }
+
     public class CustomerHolder extends RecyclerView.ViewHolder {
         public TextView name;
         public TextView company;
@@ -72,5 +83,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.CustomerHolder> {
             name = itemView.findViewById(R.id.tv_name);
             company = itemView.findViewById(R.id.tv_company);
         }
+    }
+
+    public interface OnItemSelectedListener {
+        void onItemSelected(int position);
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClicked(int position);
     }
 }

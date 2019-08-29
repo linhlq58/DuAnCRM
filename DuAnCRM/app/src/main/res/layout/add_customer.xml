@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_10">
 
     <RelativeLayout
         android:id="@+id/rl_actionbar"
@@ -12,9 +13,9 @@
 
         <Button
             android:id="@+id/btn_close"
-            android:layout_centerVertical="true"
             android:layout_width="@dimen/height_50"
             android:layout_height="@dimen/size_40"
+            android:layout_centerVertical="true"
             android:background="@drawable/close_button" />
 
         <TextView
@@ -28,10 +29,10 @@
 
         <Button
             android:id="@+id/btn_check"
-            android:layout_centerVertical="true"
             android:layout_width="@dimen/height_50"
             android:layout_height="@dimen/height_50"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/check_button" />
     </RelativeLayout>
 
@@ -42,10 +43,10 @@
         android:paddingTop="@dimen/size_20">
 
         <RelativeLayout
-            android:layout_marginStart="@dimen/dp_10"
             android:id="@+id/rl_image"
             android:layout_width="@dimen/height_50"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dp_10">
 
             <ImageView
                 android:id="@+id/img_user"
@@ -101,9 +102,9 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingEnd="@dimen/dp_10"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/rl_image">
+            android:layout_toEndOf="@id/rl_image"
+            android:paddingEnd="@dimen/dp_10">
 
             <EditText
                 android:id="@+id/edt_name"
@@ -155,8 +156,39 @@
                 android:layout_marginTop="@dimen/size_20"
                 android:hint="Ngày sinh"
                 android:inputType="date" />
+
         </RelativeLayout>
 
+        <LinearLayout
+            android:id="@+id/edit_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_60"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            android:visibility="invisible"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/delete_user"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_50"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/login_button"
+                android:text="Xóa thông tin"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/make_customer"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height_50"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@drawable/login_button"
+                android:text="Thêm khách hàng"
+                android:textColor="@color/white" />
+        </LinearLayout>
 
     </RelativeLayout>
 </RelativeLayout>
