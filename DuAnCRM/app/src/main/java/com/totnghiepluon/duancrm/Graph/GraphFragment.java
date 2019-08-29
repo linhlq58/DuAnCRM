@@ -2,6 +2,7 @@ package com.totnghiepluon.duancrm.Graph;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,16 +24,20 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.totnghiepluon.duancrm.Base.BaseFragment;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
+import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.data.GetDataFromPreference;
 import com.totnghiepluon.duancrm.R;
+import com.totnghiepluon.duancrm.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class GraphFragment extends BaseFragment {
-
-
+    private List<CustomerInfo> leadList;
+    private List<CustomerInfo> customerList;
+    private DatabaseHelper db;
     private BarChart barChart;
     private PieChart pieChart;
     private Description description;
@@ -46,8 +51,8 @@ public class GraphFragment extends BaseFragment {
             Color.rgb(140, 234, 255), Color.rgb(255, 140, 157), Color.rgb(255, 208, 140)
     };
     private GetDataFromPreference getData;
-    private List<Integer> listMonth;
-    private int length;
+    private int[] number;
+    private int length = 1;
 
     public static GraphFragment createInstance() {
 
@@ -89,26 +94,39 @@ public class GraphFragment extends BaseFragment {
     }
 
     private void init(View container) {
+        db = new DatabaseHelper(getActivity());
         pieChart = container.findViewById(R.id.pieChart);
         pieChart.setUsePercentValues(true);
         barChart = container.findViewById(R.id.barChart);
         random = new Random();
-        mChartName = "Tỉ lệ giữa các tháng so với doanh thu";
+        mChartName = "Tỉ lệ giữa các khách hàng";
         description = new Description();
-        listMonth = new ArrayList<>();
+        leadList = db.getAllLeads();
+        customerList = db.getAllCustomers();
         x1 = barChart.getXAxis();
         y1 = barChart.getAxisLeft();
-
+        number = new int[5];
     }
 
     private void drawChart() {
         getData = new GetDataFromPreference(getContext());
-        createData();
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
-        description.setText("Doanh số các tháng từ đầu năm");
+        description.setText("Số lượng các khách hàng");
         barChart.setDescription(description);
-        barChart.setMaxVisibleValueCount(listMonth.get(5));
+        number[0] = leadList.size();
+        for (int i = 0; i < customerList.size(); i++) {
+            number[customerList.get(i).getmPriority()]++;
+        }
+        sum = number[0];
+        int maxvalue = number[0];
+        for (int i = 1; i < 5; i++) {
+            if (number[i] > maxvalue) {
+                maxvalue = number[i];
+            }
+            sum += number[i];
+        }
+        barChart.setMaxVisibleValueCount(maxvalue);
         barChart.setPinchZoom(false);
         barChart.setDrawGridBackground(true);
         x1.setGranularity(1f);
@@ -119,44 +137,49 @@ public class GraphFragment extends BaseFragment {
         setDataToChart();
     }
 
-    private void createData() {
-        length = 6;
-        int temp = 150;
-        for (int i = 0; i < length; i++) {
-            temp += random.nextInt(200 / (i + 1));
-            sum += temp;
-            listMonth.add(temp);
-        }
-        getData.doSave(listMonth, "a");
-    }
-
     private void setDataToChart() {
         float groupSpace = 0.04f;
         float barSpace = 0.02f;
-        float barWidth = 0.46f;
-        List<Integer> testList = getData.loadGameSetting("a");
+        float barWidth = 0.8f;
         ArrayList<BarEntry> yVal1 = new ArrayList<>();
         ArrayList<BarEntry> yVal2 = new ArrayList<>();
-        for (int i = 0; i < length; i++) {
-            yVal1.add(new BarEntry(i, testList.get(i)));
-//            yVal2.add(new BarEntry(i, 0.3f));
-        }
-        BarDataSet set1, set2;
+        ArrayList<BarEntry> yVal3 = new ArrayList<>();
+        ArrayList<BarEntry> yVal4 = new ArrayList<>();
+        ArrayList<BarEntry> yVal5 = new ArrayList<>();
+        yVal1.add(new BarEntry(0, number[0]));
+        yVal2.add(new BarEntry(1, number[1]));
+        yVal3.add(new BarEntry(2, number[2]));
+        yVal4.add(new BarEntry(3, number[3]));
+        yVal5.add(new BarEntry(4, number[4]));
+        BarDataSet[] set = new BarDataSet[5];
         if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
-            set2 = (BarDataSet) barChart.getData().getDataSetByIndex(1);
-            set1.setValues(yVal1);
-            set2.setValues(yVal2);
+            for (int i = 0; i < 5; i++) {
+                set[i] = (BarDataSet) barChart.getData().getDataSetByIndex(i);
+            }
+            set[0].setValues(yVal1);
+            set[1].setValues(yVal2);
+            set[2].setValues(yVal3);
+            set[3].setValues(yVal4);
+            set[4].setValues(yVal5);
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(yVal1, "Số tiền");
-            set1.setColor(getResources().getColor(R.color.shortchart, null));
-            set2 = new BarDataSet(yVal2, "second");
-            set2.setColor(getResources().getColor(R.color.highchart, null));
+            set[0] = new BarDataSet(yVal1, Constants.CUSTOMER_LABEL1[0]);
+            set[1] = new BarDataSet(yVal2,  Constants.CUSTOMER_LABEL1[1]);
+            set[2] = new BarDataSet(yVal3,  Constants.CUSTOMER_LABEL1[2]);
+            set[3] = new BarDataSet(yVal4,  Constants.CUSTOMER_LABEL1[3]);
+            set[4] = new BarDataSet(yVal5,  Constants.CUSTOMER_LABEL1[4]);
+            set[0].setColor(colors[0]);
+            set[1].setColor(colors[1]);
+            set[2].setColor(colors[2]);
+            set[3].setColor(colors[3]);
+            set[4].setColor(colors[4]);
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
-            dataSets.add(set2);
+            dataSets.add(set[0]);
+            dataSets.add(set[1]);
+            dataSets.add(set[2]);
+            dataSets.add(set[3]);
+            dataSets.add(set[4]);
             BarData data = new BarData((dataSets));
             barChart.setData(data);
         }
@@ -167,13 +190,16 @@ public class GraphFragment extends BaseFragment {
 
     private void drawPieChart() {
         ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-        yvalues.add(new PieEntry(((float) listMonth.get(0) * 100 / sum), "Một", 0));
-        yvalues.add(new PieEntry(((float) listMonth.get(1) * 100 / sum), "Hai", 1));
-        yvalues.add(new PieEntry(((float) listMonth.get(2) * 100 / sum), "Ba", 2));
-        yvalues.add(new PieEntry(((float) listMonth.get(3) * 100 / sum), "Bốn", 3));
-        yvalues.add(new PieEntry(((float) listMonth.get(4) * 100 / sum), "Năm", 4));
-        yvalues.add(new PieEntry(((float) listMonth.get(5) * 100 / sum), "Sáu", 5));
-        PieDataSet dataSet = new PieDataSet(yvalues, "|Các tháng");
+        if (sum == 0) {
+            sum = 1;
+        }
+        for (int i = 0; i < 5; i++) {
+            if (number[i] == 0) {
+                break;
+            }
+            yvalues.add(new PieEntry(((float) number[i] * 100 / sum), Constants.CUSTOMER_LABEL[i], i));
+        }
+        PieDataSet dataSet = new PieDataSet(yvalues, "");
         PieData data = new PieData(dataSet);
 
         data.setValueFormatter(new PercentFormatter());

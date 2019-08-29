@@ -38,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/txt_customer1"
+            android:text="0"
             android:textSize="15sp" />
     </RelativeLayout>
 
@@ -52,7 +53,6 @@
         android:paddingHorizontal="@dimen/dp_10">
 
         <TextView
-            android:id="@+id/txt_customer2"
             android:layout_width="160dp"
             android:layout_height="@dimen/dp_30"
             android:layout_centerVertical="true"
@@ -63,6 +63,7 @@
             android:textSize="@dimen/sp_20" />
 
         <TextView
+            android:id="@+id/txt_customer2"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

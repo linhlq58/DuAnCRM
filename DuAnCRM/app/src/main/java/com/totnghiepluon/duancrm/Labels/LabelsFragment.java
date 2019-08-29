@@ -2,22 +2,30 @@ package com.totnghiepluon.duancrm.Labels;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.totnghiepluon.duancrm.Base.BaseFragment;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
+import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
+
+import java.util.List;
 
 public class LabelsFragment extends BaseFragment implements View.OnClickListener {
     private RelativeLayout layoutCustomer[];
     private TextView numberCustomer[];
+    private int number[];
+    private DatabaseHelper db;
+    private List<CustomerInfo> leadList;
+    private List<CustomerInfo> customerList;
+
 
     public static LabelsFragment createInstance() {
-
         Bundle args = new Bundle();
-
         LabelsFragment fragment = new LabelsFragment();
         fragment.setArguments(args);
         return fragment;
@@ -32,6 +40,7 @@ public class LabelsFragment extends BaseFragment implements View.OnClickListener
     protected void initVariables(Bundle savedInstanceState, View rootView) {
         layoutCustomer = new RelativeLayout[5];
         numberCustomer = new TextView[5];
+        db = new DatabaseHelper(getActivity());
         layoutCustomer[0] = rootView.findViewById(R.id.label_1);
         layoutCustomer[1] = rootView.findViewById(R.id.label_2);
         layoutCustomer[2] = rootView.findViewById(R.id.label_3);
@@ -45,9 +54,30 @@ public class LabelsFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        updateCustomer();
+    }
+
+    @Override
     protected void initData(Bundle savedInstanceState) {
         for (int i = 0; i < 5; i++) {
             layoutCustomer[i].setOnClickListener(this);
+        }
+        updateCustomer();
+    }
+
+    private void updateCustomer() {
+        leadList = db.getAllLeads();
+        customerList = db.getAllCustomers();
+        number = new int[5];
+        number[0] = leadList.size();
+        for (int i = 0; i < customerList.size(); i++) {
+            Log.d("huybv", "updateCustomer: "+customerList.get(i).getmPriority());
+            number[customerList.get(i).getmPriority()]++;
+        }
+        for (int i = 0; i < 5; i++) {
+            numberCustomer[i].setText(Integer.toString(number[i]));
         }
     }
 

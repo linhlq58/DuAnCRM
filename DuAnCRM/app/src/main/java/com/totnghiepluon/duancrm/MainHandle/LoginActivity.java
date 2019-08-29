@@ -113,6 +113,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (username.equals(managerAccount.get(i))) {
                     intent.putExtra(Constants.LOGIN, true);
                     intent.putExtra(Constants.USERNAME, Constants.MANAGER);
+                    intent.putExtra(Constants.MANAGER_NAME, account);
                     startActivity(intent);
                     isSuitable = false;
                     break;
