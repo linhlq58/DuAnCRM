@@ -48,7 +48,6 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
         recyclerView = rootView.findViewById(R.id.recyclerview);
         if (getArguments() != null) {
             username = getArguments().getString(Constants.USERNAME, Constants.MANAGER);
-            Log.d("Huybv", "initVariables: " + username);
         }
     }
 
@@ -83,7 +82,9 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
 
     private void editCustomer(int position) {
         Intent intent = new Intent(getActivity(), AddCustomer.class);
-        intent.putExtra(Constants.EDIT, position + 1);
+        Log.d("Huybv", "editCustomer: " + customerInfoList.get(position).getmName());
+        intent.putExtra(Constants.USERNAME, username);
+        intent.putExtra(Constants.EDIT, customerInfoList.get(position).getmID());
         startActivity(intent);
     }
 
@@ -110,6 +111,11 @@ public class LeadsFragment extends BaseFragment implements View.OnClickListener 
     private void changeActivity() {
         Intent intent = new Intent(getActivity(), AddCustomer.class);
         intent.putExtra(Constants.EXTRAS, false);
+        if (username == null) {
+            Log.d("Huybv", "changeActivity: ");
+        }
+        else
+        Log.d("Huybv", "changeActivity: "+ username);
         intent.putExtra(Constants.USERNAME, username);
         startActivity(intent);
     }

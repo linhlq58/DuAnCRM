@@ -20,6 +20,7 @@ import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
 
 public class AddCustomer extends BaseActivity implements View.OnClickListener {
+    private static final String TAG = "Huybv";
     private Button mBtnClose;
     private Button mBtnFinish;
     private TextView label;
@@ -129,16 +130,48 @@ public class AddCustomer extends BaseActivity implements View.OnClickListener {
                 if (editCustomer == -1) {
                     addNewCustomer(isAddCustomer);
                 } else {
-                    editCustomerinfo();
+                    editCustomerinfo(db.getCustomerById(editCustomer));
                 }
                 Intent returnIntent = new Intent();
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
                 break;
+            case R.id.delete_user:
+                deleteCustomer(db.getCustomerById(editCustomer).getmID());
+                break;
+            case R.id.make_customer:
+                editCustomerinfo(db.getCustomerById(editCustomer));
         }
     }
 
-    private void editCustomerinfo() {
+    private void deleteCustomer(int customerById) {
+        db.deleteById(customerById);
+        finish();
+    }
 
+    private void editCustomerinfo(CustomerInfo customerById) {
+        db.deleteById(customerById.getmID());
+        customerById.setmOwner(username);
+        edit(customerById);
+        finish();
+    }
+
+    private void edit(CustomerInfo customerById) {
+        int priority = customerById.getmPriority();
+        if (isAddCustomer && dropDown != null) {
+            priority = dropDown.getSelectedItemPosition() + 1;
+        }
+        CustomerInfo customer = new CustomerInfo(mEdtName.getText().toString(), mEdtPhone.getText().toString()
+                , mEdtCompany.getText().toString(), mEdtEmail.getText().toString(),
+                mEdtLocation.getText().toString(), mEdtBirthday.getText().toString(),
+                priority, 0, customerById.getmOwner());
+        if (this.isAddCustomer) {
+            Log.d(TAG, "customer: " + customerById.getmOwner());
+            db.addCustomer(customer);
+        } else {
+            db.addLead(customer);
+            Log.d(TAG, "lead: " + customerById.getmOwner());
+
+        }
     }
 }

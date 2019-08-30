@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,6 +16,7 @@ import com.totnghiepluon.duancrm.Base.BaseFragment;
 import com.totnghiepluon.duancrm.Base.StartApplication;
 import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
+import com.totnghiepluon.duancrm.adapter.MyAdapter;
 import com.totnghiepluon.duancrm.data.DatabaseHelper;
 import com.totnghiepluon.duancrm.utils.Constants;
 
@@ -25,11 +27,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CustomersFragment extends BaseFragment implements View.OnClickListener {
     private DatabaseHelper db;
-
     private RecyclerView recyclerView;
     private ListCustomerAdapter listCustomerAdapter;
     private ArrayList<CustomerInfo> listCustomer;
     private Button mAddLead;
+    private String username;
 
     private BroadcastReceiver receiver;
 
@@ -51,6 +53,10 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
     protected void initVariables(Bundle savedInstanceState, View rootView) {
         recyclerView = rootView.findViewById(R.id.rcv_customer);
         mAddLead = rootView.findViewById(R.id.customer_add);
+        if (getArguments() != null) {
+            username = getArguments().getString(Constants.USERNAME, Constants.MANAGER);
+            Log.d("Huybv", username);
+        }
     }
 
     @Override
@@ -77,7 +83,7 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onEmail(String email) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto",email , null));
+                        "mailto", email, null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
                 emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
@@ -87,6 +93,12 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
             @Override
             public void onItemSelected(int position, int id) {
                 editCustomer(id);
+            }
+        });
+        listCustomerAdapter.setOnSelectedListener(new ListCustomerAdapter.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(int position) {
+                editCustomer(position);
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
@@ -109,6 +121,14 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
         startActivity(intent);
     }
 
+    private void editCustomer(int position) {
+        Intent intent = new Intent(getActivity(), AddCustomer.class);
+//        Log.d("Huybv", customerInfoList.get(position).getmID()+ "" + customerInfoList.get(position).getmName());
+        intent.putExtra(Constants.EDIT, listCustomer.get(position).getmID());
+        intent.putExtra(Constants.USERNAME, username);
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.customer_add) {
@@ -127,7 +147,7 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            listCustomerAdapter .refreshData(db.getAllCustomers());
+            listCustomerAdapter.refreshData(db.getAllCustomers());
         }
     }
 

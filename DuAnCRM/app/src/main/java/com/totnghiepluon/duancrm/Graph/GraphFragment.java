@@ -86,11 +86,7 @@ public class GraphFragment extends BaseFragment {
         init(view);
         drawChart();
         drawPieChart();
-        printDataFromAPI();
         return view;
-    }
-
-    private void printDataFromAPI() {
     }
 
     private void init(View container) {
@@ -101,14 +97,14 @@ public class GraphFragment extends BaseFragment {
         random = new Random();
         mChartName = "Tỉ lệ giữa các khách hàng";
         description = new Description();
-        leadList = db.getAllLeads();
-        customerList = db.getAllCustomers();
         x1 = barChart.getXAxis();
         y1 = barChart.getAxisLeft();
-        number = new int[5];
     }
 
     private void drawChart() {
+        leadList = db.getAllLeads();
+        customerList = db.getAllCustomers();
+        number = new int[5];
         getData = new GetDataFromPreference(getContext());
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
@@ -214,5 +210,12 @@ public class GraphFragment extends BaseFragment {
         data.setValueTextSize(17f);
         data.setValueTextColor(getResources().getColor(R.color.black));
         pieChart.invalidate();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        drawChart();
+        drawPieChart();
     }
 }

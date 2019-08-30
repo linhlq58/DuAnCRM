@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.Models.Task;
@@ -33,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_TASK_TIME = "task_time";
     private static final String KEY_TASK_CUSTOMER = "task_customer";
     private static final String KEY_TASK_DESC = "task_desc";
+    private static final String TAG = "Huybv";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -153,7 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<CustomerInfo> getAllLeads() {
         ArrayList<CustomerInfo> listMessage = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_CUSTOMER
-                + " WHERE " + KEY_IS_CUSTOMER + " = 0";
+                + " WHERE " + KEY_IS_CUSTOMER + " = 0 ORDER BY " + KEY_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
@@ -180,13 +182,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<CustomerInfo> getLeadByUser(String username) {
         ArrayList<CustomerInfo> listMessage = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_CUSTOMER
-                + " WHERE " + KEY_IS_CUSTOMER + " = 0";
+                + " WHERE " + KEY_IS_CUSTOMER + " = 0 ORDER BY " + KEY_NAME;
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         if (cursor.moveToFirst()) {
             do {
-                if (cursor.getString(9).equals(username)) {
+                if (cursor == null) {
+                    Log.d(TAG, "getLeadByUser: null");
+                } else if (cursor.getString(9) == null) {
+                    Log.d(TAG, "get owner: null");
+                } else if (cursor.getString(9).equals(username)) {
                     CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
                             , cursor.getString(3), cursor.getString(4), cursor.getString(5)
                             , cursor.getString(6), cursor.getInt(7), cursor.getInt(0), cursor.getString(9));
@@ -219,7 +225,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
                         , cursor.getString(3), cursor.getString(4), cursor.getString(5)
-                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getString(9));
+                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(0), cursor.getString(9));
                 if (cursor.getInt(8) == 0) {
                     customer.setCustomer(false);
                 } else {
@@ -335,7 +341,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         db.delete(TABLE_CUSTOMER, KEY_ID + " = ?",
                 new String[]{String.valueOf(id)});
     }
