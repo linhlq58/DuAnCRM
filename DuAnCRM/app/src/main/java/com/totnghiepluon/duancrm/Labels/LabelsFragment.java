@@ -73,7 +73,6 @@ public class LabelsFragment extends BaseFragment implements View.OnClickListener
         number = new int[5];
         number[0] = leadList.size();
         for (int i = 0; i < customerList.size(); i++) {
-            Log.d("huybv", "updateCustomer: "+customerList.get(i).getmPriority());
             number[customerList.get(i).getmPriority()]++;
         }
         for (int i = 0; i < 5; i++) {

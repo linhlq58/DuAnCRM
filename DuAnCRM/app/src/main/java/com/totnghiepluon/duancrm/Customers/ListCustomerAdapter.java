@@ -23,6 +23,7 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
     private Activity context;
     private ArrayList<CustomerInfo> listCustomer;
     private IListAction iListAction;
+    private ListCustomerAdapter.OnItemSelectedListener mOnItemSelectedListener;
 
     public ListCustomerAdapter(Activity context, ArrayList<CustomerInfo> listCustomer, IListAction iListAction) {
         this.context = context;
@@ -64,7 +65,13 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
                 iListAction.onEmail(listCustomer.get(position).getmEmail());
             }
         });
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnItemSelectedListener == null) return;
+                mOnItemSelectedListener.onItemSelected(position);
+            }
+        });
         switch (payState) {
             case 1:
                 holder.tvState.setBackgroundResource(R.drawable.bg_label_not_sale_yet);
@@ -79,6 +86,11 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
                 holder.tvState.setBackgroundResource(R.drawable.bg_label_vip);
                 break;
         }
+
+    }
+
+    public void setOnSelectedListener(OnItemSelectedListener listener) {
+        mOnItemSelectedListener = listener;
     }
 
     @Override
@@ -114,5 +126,10 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
         void onSms(String phoneNumber);
 
         void onEmail(String email);
+
+    }
+
+    public interface OnItemSelectedListener {
+        void onItemSelected(int position);
     }
 }

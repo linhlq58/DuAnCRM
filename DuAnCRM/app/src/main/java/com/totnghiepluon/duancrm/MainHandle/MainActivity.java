@@ -126,6 +126,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         LeadsFragment leadsFragment = LeadsFragment.createInstance();
         leadsFragment.setArguments(bundle);
         CustomersFragment customersFragment = CustomersFragment.createInstance();
+        customersFragment.setArguments(bundle);
         LabelsFragment labelsFragment = LabelsFragment.createInstance();
         TasksFragment tasksFragment = TasksFragment.createInstance();
         GraphFragment graphFragment = GraphFragment.createInstance();

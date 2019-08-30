@@ -45,13 +45,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lê Quyền Linh"
-                android:textSize="@dimen/sp_20"
+                android:textSize="25sp"
                 android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/tv_position"
                 android:layout_below="@id/tv_name"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sale Manager"
