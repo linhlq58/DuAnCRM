@@ -10,13 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainHandle.LoginActivity"/>
+        <activity android:name=".MainHandle.MainActivity"/>
         <activity android:name=".AddCustomer"/>
         <activity android:name=".Labels.LabelActivity"/>
         <activity android:name=".ContactData.ContactsActivity"/>
         <activity android:name=".MainHandle.AccountManager"/>
         <activity android:name=".Tasks.AddTaskActivity"/>
-        <activity android:name=".MainHandle.MainActivity">
+        <activity android:name=".MainHandle.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

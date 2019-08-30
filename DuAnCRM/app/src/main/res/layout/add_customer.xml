@@ -14,8 +14,8 @@
 
         <Button
             android:id="@+id/btn_close"
-            android:layout_width="@dimen/height_50"
-            android:layout_height="@dimen/size_40"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:layout_centerVertical="true"
             android:background="@drawable/close_button" />
 
@@ -30,8 +30,8 @@
 
         <Button
             android:id="@+id/btn_check"
-            android:layout_width="@dimen/height_50"
-            android:layout_height="@dimen/height_50"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@drawable/check_button" />

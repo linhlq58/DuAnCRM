@@ -39,7 +39,7 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CustomerViewHolder holder, final int position) {
-        String nameCompany = listCustomer.get(position).getmName() + " (" + listCustomer.get(position).getmCompany() + ")";
+        String nameCompany = listCustomer.get(position).getmName();
         int payState = listCustomer.get(position).getmPriority();
         holder.tvState.setText(Constants.CUSTOMER_LABEL[payState]);
         holder.tvName.setText(nameCompany);
@@ -64,6 +64,21 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
                 iListAction.onEmail(listCustomer.get(position).getmEmail());
             }
         });
+
+        switch (payState) {
+            case 1:
+                holder.tvState.setBackgroundResource(R.drawable.bg_label_not_sale_yet);
+                break;
+            case 2:
+                holder.tvState.setBackgroundResource(R.drawable.bg_label_have_contract);
+                break;
+            case 3:
+                holder.tvState.setBackgroundResource(R.drawable.bg_label_sale_done);
+                break;
+            case 4:
+                holder.tvState.setBackgroundResource(R.drawable.bg_label_vip);
+                break;
+        }
     }
 
     @Override

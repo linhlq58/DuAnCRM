@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/dp_10">
 
     <RelativeLayout
@@ -49,7 +48,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_email"></ImageView>
+            android:src="@drawable/ic_date"></ImageView>
 
         <TextView
             android:id="@+id/tvDate"
@@ -72,7 +71,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_email"></ImageView>
+            android:src="@drawable/ic_time"></ImageView>
 
         <TextView
             android:id="@+id/tvTime"
@@ -95,15 +94,16 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_email"></ImageView>
+            android:src="@drawable/ic_task_customer"></ImageView>
 
-        <TextView
-            android:id="@+id/tvCustomer"
+        <EditText
+            android:id="@+id/editCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chạm để thêm khách hàng"
+            android:hint="Chạm để thêm khách hàng"
+            android:background="@android:color/transparent"
             android:layout_marginLeft="20dp"
-            android:textSize="16sp"></TextView>
+            android:textSize="16sp"></EditText>
 
     </LinearLayout>
 
@@ -118,14 +118,14 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_email"></ImageView>
+            android:src="@drawable/ic_note"></ImageView>
 
         <EditText
             android:id="@+id/editDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:text="Chạm để thêm mô tả"
+            android:hint="Chạm để thêm mô tả"
             android:maxLines="20"
             android:layout_marginLeft="20dp"
             android:textSize="16sp"></EditText>

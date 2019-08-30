@@ -7,12 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.totnghiepluon.duancrm.Models.CustomerInfo;
+import com.totnghiepluon.duancrm.Models.Task;
 
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "CRMDatabase";
+
     private static final String TABLE_CUSTOMER = "customer";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -24,6 +26,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_LABEL = "label";
     private static final String Key_OWNER = "owner";
     private static final String KEY_IS_CUSTOMER = "is_customer";
+
+    private static final String TABLE_TASK = "task";
+    private static final String KEY_TASK_ID = "task_id";
+    private static final String KEY_TASK_DATE = "task_date";
+    private static final String KEY_TASK_TIME = "task_time";
+    private static final String KEY_TASK_CUSTOMER = "task_customer";
+    private static final String KEY_TASK_DESC = "task_desc";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,12 +51,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + KEY_LABEL + " INTEGER, "
                 + KEY_IS_CUSTOMER + " INTEGER,"
                 + Key_OWNER + " TEXT)";
+
+        String CREATE_TASK_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_TASK + " ("
+                + KEY_TASK_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_TASK_DATE + " TEXT, "
+                + KEY_TASK_TIME + " TEXT, "
+                + KEY_TASK_CUSTOMER + " TEXT, "
+                + KEY_TASK_DESC + " TEXT)";
+
         db.execSQL(CREATE_CUSTOMER_TABLE);
+        db.execSQL(CREATE_TASK_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CUSTOMER);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASK);
 
         this.onCreate(db);
     }
@@ -88,6 +107,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_CUSTOMER, null, values);
         db.setTransactionSuccessful();
         db.endTransaction();
+    }
+
+    public void addTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.beginTransaction();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TASK_DATE, task.getTaskDate());
+        values.put(KEY_TASK_TIME, task.getTaskTime());
+        values.put(KEY_TASK_CUSTOMER, task.getTaskCustomer());
+        values.put(KEY_TASK_DESC, task.getTaskDesc());
+        db.insert(TABLE_TASK, null, values);
+        db.setTransactionSuccessful();
+        db.endTransaction();
+    }
+
+    public ArrayList<Task> getAllTasks() {
+        ArrayList<Task> listTasks = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_TASK;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Task task = new Task();
+                task.setTaskId(cursor.getInt(0));
+                task.setTaskDate(cursor.getString(1));
+                task.setTaskTime(cursor.getString(2));
+                task.setTaskCustomer(cursor.getString(3));
+                task.setTaskDesc(cursor.getString(4));
+
+                listTasks.add(task);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return listTasks;
     }
 
     public ArrayList<CustomerInfo> getAllLeads() {
@@ -151,6 +211,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_CUSTOMER
                 + " WHERE " + KEY_IS_CUSTOMER + " = 1 ORDER BY " + KEY_LABEL;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                CustomerInfo customer = new CustomerInfo(cursor.getString(1), cursor.getString(2)
+                        , cursor.getString(3), cursor.getString(4), cursor.getString(5)
+                        , cursor.getString(6), cursor.getInt(7), cursor.getInt(8), cursor.getString(9));
+                if (cursor.getInt(8) == 0) {
+                    customer.setCustomer(false);
+                } else {
+                    customer.setCustomer(true);
+                }
+
+                listMessage.add(customer);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return listMessage;
+    }
+
+    public ArrayList<CustomerInfo> getAllData() {
+        ArrayList<CustomerInfo> listMessage = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLE_CUSTOMER
+                + " ORDER BY " + KEY_LABEL;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);

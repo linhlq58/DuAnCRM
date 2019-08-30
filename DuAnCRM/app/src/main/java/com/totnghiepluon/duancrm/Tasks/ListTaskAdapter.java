@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.totnghiepluon.duancrm.Models.CustomerInfo;
+import com.totnghiepluon.duancrm.Models.Task;
 import com.totnghiepluon.duancrm.R;
 
 import java.util.ArrayList;
@@ -15,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskViewHolder> {
     private Activity context;
-    private ArrayList<CustomerInfo> listCustomer;
+    private ArrayList<Task> listTask;
 
-    public ListTaskAdapter(Activity context, ArrayList<CustomerInfo> listCustomer) {
+    public ListTaskAdapter(Activity context, ArrayList<Task> listTask) {
         this.context = context;
-        this.listCustomer = listCustomer;
+        this.listTask = listTask;
     }
 
     @NonNull
@@ -31,27 +32,31 @@ public class ListTaskAdapter extends RecyclerView.Adapter<ListTaskAdapter.TaskVi
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-        String nameCompany = listCustomer.get(position).getmName() + " (" + listCustomer.get(position).getmCompany() + ")";
-        holder.tvName.setText(nameCompany);
+        String info = listTask.get(position).getTaskTime() + ", " + listTask.get(position).getTaskDate() + " - " + listTask.get(position).getTaskCustomer();
+
+        holder.tvName.setText(listTask.get(position).getTaskDesc());
+        holder.tvInfo.setText(info);
     }
 
     @Override
     public int getItemCount() {
-        return listCustomer.size();
+        return listTask.size();
     }
 
-    public void refreshData(ArrayList<CustomerInfo> listCustomer) {
-        this.listCustomer = listCustomer;
+    public void refreshData(ArrayList<Task> listTask) {
+        this.listTask = listTask;
         notifyDataSetChanged();
     }
 
     public class TaskViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName;
+        private TextView tvInfo;
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tv_name);
+            tvInfo = itemView.findViewById(R.id.tv_info);
         }
     }
 }

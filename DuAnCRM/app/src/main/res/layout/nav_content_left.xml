@@ -10,11 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="120dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/bg_acc"
+            android:scaleType="centerCrop"></ImageView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80000000"></View>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_avatar"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/size_20" />
 
@@ -34,7 +45,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lê Quyền Linh"
-                android:textSize="@dimen/sp_20"/>
+                android:textSize="@dimen/sp_20"
+                android:textColor="@android:color/white"/>
 
             <TextView
                 android:id="@+id/tv_position"
@@ -42,7 +54,8 @@
                 android:layout_marginTop="@dimen/dp_10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sale Manager" />
+                android:text="Sale Manager"
+                android:textColor="@android:color/white"/>
 
         </RelativeLayout>
 
@@ -68,7 +81,7 @@
                 android:id="@+id/menu_1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/document_import"
+                android:src="@drawable/ic_add_from_contact"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>
@@ -93,7 +106,7 @@
                 android:id="@+id/menu_2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_customer"
+                android:src="@drawable/ic_customer_selected"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>
@@ -117,7 +130,7 @@
                 android:id="@+id/menu_3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/co_ic_menu_help"
+                android:src="@drawable/ic_question"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>
@@ -142,7 +155,7 @@
                 android:layout_width="30dp"
                 android:alpha="0.6"
                 android:layout_height="30dp"
-                android:src="@drawable/co_ic_popup_info"
+                android:src="@drawable/ic_infor"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/size_20">
             </ImageView>
