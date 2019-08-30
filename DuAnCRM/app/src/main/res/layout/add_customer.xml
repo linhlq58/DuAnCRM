@@ -5,12 +5,200 @@
     android:orientation="vertical"
     android:paddingBottom="@dimen/dp_10">
 
+    <LinearLayout
+        android:id="@+id/layout_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rl_actionbar"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_toRightOf="@id/img_user"
+                android:hint="Tên khách hàng" />
+
+            <ImageView
+                android:id="@+id/img_user"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_customer_selected"></ImageView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_toRightOf="@id/img_phone"
+                android:hint="Số điện thoại" />
+
+            <ImageView
+                android:id="@+id/img_phone"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_call"></ImageView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_company"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_toRightOf="@id/img_company"
+                android:hint="Công ty" />
+
+            <ImageView
+                android:id="@+id/img_company"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_company"></ImageView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_toRightOf="@id/img_email"
+                android:hint="Địa chỉ email" />
+
+            <ImageView
+                android:id="@+id/img_email"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_email"></ImageView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_toRightOf="@id/img_location"
+                android:hint="Địa chỉ" />
+
+            <ImageView
+                android:id="@+id/img_location"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_map"></ImageView>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edt_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:layout_toRightOf="@id/img_birthday"
+                android:hint="Ngày sinh" />
+
+            <ImageView
+                android:id="@+id/img_birthday"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="15dp"
+                android:src="@drawable/ic_date"></ImageView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_60"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <Button
+            android:id="@+id/delete_user"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_50"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="Xóa thông tin"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/make_customer"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_50"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_weight="1"
+            android:background="@drawable/login_button"
+            android:text="Thêm khách hàng"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/dp_10"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/dp_10"
+        android:visibility="invisible">
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/customer_type"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
+
+        <TextView
+            android:id="@+id/customer_type"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_40"
+            android:gravity="center"
+            android:text="Loại khách hàng: "
+            android:textSize="@dimen/sp_20" />
+    </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/rl_actionbar"
         android:layout_width="match_parent"
-        android:paddingHorizontal="@dimen/dp_10"
         android:layout_height="@dimen/size_60"
-        android:background="@color/colorPrimary">
+        android:background="@color/colorPrimary"
+        android:paddingHorizontal="@dimen/dp_10">
 
         <Button
             android:id="@+id/btn_close"
@@ -19,15 +207,6 @@
             android:layout_centerVertical="true"
             android:background="@drawable/close_button" />
 
-        <TextView
-            android:id="@+id/txt_label"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
         <Button
             android:id="@+id/btn_check"
             android:layout_width="@dimen/dp_30"
@@ -35,189 +214,15 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="@drawable/check_button" />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/rl_actionbar"
-        android:paddingTop="@dimen/size_20">
-
-        <RelativeLayout
-            android:id="@+id/rl_image"
-            android:layout_width="@dimen/height_50"
+        <TextView
+            android:id="@+id/txt_label"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/dp_10">
-
-            <ImageView
-                android:id="@+id/img_user"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:alpha="0.6"
-                android:background="@drawable/user" />
-
-            <ImageView
-                android:id="@+id/img_phone"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/img_user"
-                android:layout_marginTop="@dimen/size_20"
-                android:background="@drawable/phone" />
-
-            <ImageView
-                android:id="@+id/img_company"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/img_phone"
-                android:layout_marginTop="@dimen/size_20"
-                android:alpha="0.8"
-                android:background="@drawable/company" />
-
-            <ImageView
-                android:id="@+id/img_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/img_company"
-                android:layout_marginTop="@dimen/size_20"
-                android:background="@drawable/mail" />
-
-            <ImageView
-                android:id="@+id/img_location"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/img_email"
-                android:layout_marginTop="@dimen/size_20"
-                android:alpha="0.8"
-                android:background="@drawable/location" />
-
-            <ImageView
-                android:id="@+id/img_birthday"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/img_location"
-                android:layout_marginTop="@dimen/size_20"
-                android:alpha="0.6"
-                android:background="@drawable/birthday_cake" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_toEndOf="@id/rl_image"
-            android:paddingEnd="@dimen/dp_10">
-
-            <EditText
-                android:id="@+id/edt_name"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_marginTop="@dimen/dp_10"
-                android:hint="Tên khách hàng" />
-
-
-            <EditText
-                android:id="@+id/edt_phone"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/edt_name"
-                android:layout_marginTop="@dimen/size_20"
-                android:hint="Số điện thoại"
-                android:inputType="phone" />
-
-            <EditText
-                android:id="@+id/edt_company"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/edt_phone"
-                android:layout_marginTop="@dimen/size_20"
-                android:hint="Công ty" />
-
-            <EditText
-                android:id="@+id/edt_email"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/edt_company"
-                android:layout_marginTop="@dimen/size_20"
-                android:hint="Địa chỉ email"
-                android:inputType="textEmailAddress" />
-
-            <EditText
-                android:id="@+id/edt_address"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/edt_email"
-                android:layout_marginTop="@dimen/size_20"
-                android:hint="Địa chỉ" />
-
-            <EditText
-                android:id="@+id/edt_birthday"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_50"
-                android:layout_below="@id/edt_address"
-                android:layout_marginTop="@dimen/size_20"
-                android:hint="Ngày sinh"
-                android:inputType="date" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_dropdown"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_50"
-            android:paddingHorizontal="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_centerInParent="true"
             android:gravity="center"
-            android:visibility="invisible"
-            android:layout_below="@id/layout_edit">
-
-            <TextView
-                android:id="@+id/customer_type"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_40"
-                android:gravity="center"
-                android:text="Loại khách hàng: "
-                android:textSize="@dimen/sp_20" />
-
-            <Spinner
-                android:id="@+id/spinner1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_toEndOf="@id/customer_type"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/edit_layout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_60"
-            android:layout_alignParentBottom="true"
-            android:gravity="bottom"
-            android:visibility="invisible"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/delete_user"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_50"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_10"
-                android:layout_weight="1"
-                android:background="@drawable/login_button"
-                android:text="Xóa thông tin"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/make_customer"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/height_50"
-                android:layout_marginEnd="@dimen/dp_10"
-                android:layout_weight="1"
-                android:background="@drawable/login_button"
-                android:text="Thêm khách hàng"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
+            android:textColor="@color/white"
+            android:textSize="20sp" />
     </RelativeLayout>
+
 </RelativeLayout>
