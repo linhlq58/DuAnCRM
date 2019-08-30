@@ -65,7 +65,18 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(iListAction == null) return;
+                iListAction.onItemSelected(position, listCustomer.get(position).getmID());
+            }
+        });
+
         switch (payState) {
+            case 0:
+                holder.tvState.setBackgroundResource(R.drawable.bg_label_lead);
+                break;
             case 1:
                 holder.tvState.setBackgroundResource(R.drawable.bg_label_not_sale_yet);
                 break;
@@ -114,5 +125,7 @@ public class ListCustomerAdapter extends RecyclerView.Adapter<ListCustomerAdapte
         void onSms(String phoneNumber);
 
         void onEmail(String email);
+
+        void onItemSelected(int position, int id);
     }
 }

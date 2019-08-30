@@ -1,17 +1,25 @@
 package com.totnghiepluon.duancrm.ContactData;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.totnghiepluon.duancrm.Base.BaseActivity;
+import com.totnghiepluon.duancrm.Base.StartApplication;
+import com.totnghiepluon.duancrm.Models.CustomerInfo;
 import com.totnghiepluon.duancrm.R;
+import com.totnghiepluon.duancrm.data.DatabaseHelper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +31,8 @@ import android.content.CursorLoader;
 import android.content.Loader;
 
 public class ContactsActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener, View.OnClickListener {
+    private DatabaseHelper db;
+
     /*
      * Defines an array that contains column names to move from
      * the Cursor to the ListView.
@@ -92,6 +102,8 @@ public class ContactsActivity extends BaseActivity implements LoaderManager.Load
 
     @Override
     protected void initData(Bundle savedInstanceState) {
+        db = StartApplication.getDb();
+
         // Initializes the loader
         getLoaderManager().initLoader(0, null, this);
 
@@ -123,6 +135,46 @@ public class ContactsActivity extends BaseActivity implements LoaderManager.Load
          * You can use contactUri as the content URI for retrieving
          * the details for a contact.
          */
+
+        int ColumeIndex_DISPLAY_NAME = cursor.getColumnIndex(Build.VERSION.SDK_INT
+                >= Build.VERSION_CODES.HONEYCOMB ?
+                ContactsContract.Contacts.DISPLAY_NAME_PRIMARY :
+                ContactsContract.Contacts.DISPLAY_NAME);
+        String name = cursor.getString(ColumeIndex_DISPLAY_NAME);
+
+        ContentResolver cr = getContentResolver();
+
+        Cursor phones = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
+        while (phones.moveToNext()) {
+            String number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+
+            /*int type = phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
+            switch (type) {
+                case ContactsContract.CommonDataKinds.Phone.TYPE_HOME:
+                    // do something with the Home number here...
+                    Log.e("home phone", number);
+                    break;
+                case ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE:
+                    // do something with the Mobile number here...
+                    Log.e("home phone", number);
+                    break;
+                case ContactsContract.CommonDataKinds.Phone.TYPE_WORK:
+                    // do something with the Work number here...
+                    Log.e("home phone", number);
+                    break;
+            }*/
+
+            CustomerInfo customerInfo = new CustomerInfo();
+            customerInfo.setmName(name);
+            customerInfo.setmPhoneNumber(number);
+
+            db.addCustomer(customerInfo);
+
+            Intent updateCustomer = new Intent("update");
+            sendBroadcast(updateCustomer);
+        }
+        phones.close();
     }
 
     @NonNull

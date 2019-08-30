@@ -1,7 +1,10 @@
 package com.totnghiepluon.duancrm.Customers;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +30,8 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
     private ListCustomerAdapter listCustomerAdapter;
     private ArrayList<CustomerInfo> listCustomer;
     private Button mAddLead;
+
+    private BroadcastReceiver receiver;
 
     public static CustomersFragment createInstance() {
 
@@ -78,11 +83,30 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, email);
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
+
+            @Override
+            public void onItemSelected(int position, int id) {
+                editCustomer(id);
+            }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false));
         recyclerView.setAdapter(listCustomerAdapter);
 
         mAddLead.setOnClickListener(this);
+
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                listCustomerAdapter .refreshData(db.getAllCustomers());
+            }
+        };
+        getActivity().registerReceiver(receiver, new IntentFilter("update"));
+    }
+
+    private void editCustomer(int id) {
+        Intent intent = new Intent(getActivity(), AddCustomer.class);
+        intent.putExtra(Constants.EDIT, id);
+        startActivity(intent);
     }
 
     @Override
@@ -104,6 +128,14 @@ public class CustomersFragment extends BaseFragment implements View.OnClickListe
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             listCustomerAdapter .refreshData(db.getAllCustomers());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (receiver != null) {
+            getActivity().unregisterReceiver(receiver);
         }
     }
 }
